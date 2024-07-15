@@ -1,0 +1,62 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --block-bg-color: #f0f0f0;
+    --normal-bg-color: #e0e0e0;
+    --handle-color: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f0f0f0;
+        --block-bg-color: #2a2a2a;
+        --normal-bg-color: #3a3a3a;
+        --handle-color: #ffffff;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.handle {
+    font-weight: bold;
+    margin-top: 20px;
+    color: var(--handle-color);
+}
+
+.content {
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.block {
+    background-color: var(--block-bg-color);
+}
+
+.statement {
+    font-style: italic;
+}
+
+.gradient {
+    color: white;
+    background: linear-gradient(to top, var(--color-dark), var(--color-light));
+}
+
+.normal {
+    background-color: var(--normal-bg-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .gradient {
+        color: var(--bg-color);
+    }
+}
