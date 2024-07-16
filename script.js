@@ -22,8 +22,10 @@ function getBaseColor(colorStyle) {
         return colorStyle;
     }
     const colorName = colorStyle.split('-')[0];
-    return predefinedColors[colorName] || '#cccccc'; // Default to a light grey if color not found
+    return predefinedColors[colorName] || '#cccccc';
 }
+
+let contentData = null;
 
 async function fetchContent() {
     const url = 'https://app.simplenote.com/publish/L965Ft';
@@ -40,43 +42,26 @@ async function fetchContent() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
         
-        const contentDiv = document.getElementById('content-container');
-        contentDiv.innerHTML = ''; // Clear existing content
+        contentData = {};
         const paragraphs = doc.querySelectorAll('.note-detail-markdown p');
         
         paragraphs.forEach((p, index) => {
-            if (index === 0) return; // Skip the title
+            if (index === 0) return;
             
             const text = p.textContent.trim();
             if (text.startsWith('@handle=')) {
                 const parts = text.split('::').map(part => part.trim());
                 const handle = parts[0].split('=')[1];
                 
-                const handleDiv = document.createElement('div');
-                handleDiv.className = 'handle';
-                handleDiv.textContent = `@${handle}`;
-                contentDiv.appendChild(handleDiv);
+                contentData[handle] = {
+                    tweets: []
+                };
                 
                 for (let i = 1; i < parts.length - 1; i++) {
                     const contentParts = parts[i].match(/(.+),\s*(.+)\s*\((.+)\)/);
                     if (contentParts) {
                         const [, contentType, colorStyle, message] = contentParts;
-                        
-                        const contentDiv = document.createElement('div');
-                        contentDiv.className = `content ${contentType}`;
-                        contentDiv.textContent = message;
-                        
-                        if (colorStyle.endsWith('-gradient')) {
-                            const baseColor = getBaseColor(colorStyle);
-                            const gradient = createGradient(baseColor);
-                            contentDiv.classList.add('gradient');
-                            contentDiv.style.setProperty('--color-dark', gradient.dark);
-                            contentDiv.style.setProperty('--color-light', gradient.light);
-                        } else {
-                            contentDiv.classList.add(colorStyle);
-                        }
-                        
-                        handleDiv.appendChild(contentDiv);
+                        contentData[handle].tweets.push({ contentType, colorStyle, message });
                     }
                 }
             }
@@ -87,9 +72,80 @@ async function fetchContent() {
     }
 }
 
-function startPeriodicFetch(interval = 60000) {
-    fetchContent(); // Initial fetch
-    setInterval(fetchContent, interval); // Fetch every 'interval' milliseconds
+function displayProfile(handle) {
+    const profileContainer = document.getElementById('profile-container');
+    const profileName = document.getElementById('profile-name');
+    const profileHandle = document.getElementById('profile-handle');
+    const profileBio = document.getElementById('profile-bio');
+    const followingCount = document.getElementById('following-count');
+    const followersCount = document.getElementById('followers-count');
+
+    profileName.textContent = handle; // Using handle as name for demonstration
+    profileHandle.textContent = `@${handle}`;
+    profileBio.textContent = 'This is a sample bio for the user.'; // Sample bio
+    followingCount.textContent = 'Following: 100'; // Sample following count
+    followersCount.textContent = 'Followers: 200'; // Sample followers count
+
+    profileContainer.style.display = 'block';
 }
 
-document.addEventListener('DOMContentLoaded', () => startPeriodicFetch());
+
+function displayContent(handle) {
+    const contentContainer = document.getElementById('content-container');
+    contentContainer.innerHTML = '';
+    
+    if (contentData && contentData[handle]) {
+        contentData[handle].tweets.forEach(tweet => {
+            const tweetDiv = document.createElement('div');
+            tweetDiv.className = `tweet ${tweet.contentType}`;
+            
+            const tweetContent = document.createElement('p');
+            tweetContent.className = 'tweet-content';
+            tweetContent.textContent = tweet.message;
+            
+            tweetDiv.appendChild(tweetContent);
+            
+            // 应用颜色样式
+            if (tweet.colorStyle.endsWith('-gradient')) {
+                const baseColor = getBaseColor(tweet.colorStyle);
+                const gradient = createGradient(baseColor);
+                tweetDiv.classList.add('gradient');
+                tweetDiv.style.setProperty('--color-light', gradient.light);
+                tweetDiv.style.setProperty('--color-dark', gradient.dark);
+            } else {
+                // 对于非渐变颜色，直接应用类名
+                tweetDiv.classList.add(tweet.colorStyle);
+            }
+            
+            contentContainer.appendChild(tweetDiv);
+        });
+    } else {
+        contentContainer.textContent = 'No tweets found for this handle.';
+    }
+}
+
+// ... 保留其余的代码 ...
+
+function handleSubmit() {
+    const handleInput = document.getElementById('handle-input');
+    const handle = handleInput.value.trim();
+    
+    if (handle) {
+        displayProfile(handle);
+        displayContent(handle);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchContent();
+    
+    const submitButton = document.getElementById('submit-handle');
+    submitButton.addEventListener('click', handleSubmit);
+    
+    const handleInput = document.getElementById('handle-input');
+    handleInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    });
+});

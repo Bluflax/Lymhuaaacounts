@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lymahuaa Accounts</title>
+    <title>Lymahuaa Profile</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="profile-container" style="display: block;">
+        <div class="profile-header">
+            <div class="profile-banner"></div>
+            <div class="profile-avatar"></div>
+        </div>
+        <div id="input-container">
+            <input type="text" id="handle-input" placeholder="Enter user handle" pattern="[A-Za-z0-9]+" required>
+            <button id="submit-handle">Search</button>
+        </div>
+        <div class="profile-info">
+            <h1 id="profile-name"></h1>
+            <p id="profile-handle"></p>
+            <p id="profile-bio"></p>
+            <div class="profile-stats">
+                <span id="following-count"></span>
+                <span id="followers-count"></span>
+            </div>
+        </div>
+    </div>
     <div id="content-container"></div>
     <script src="script.js"></script>
 </body>

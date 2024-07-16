@@ -1,61 +1,166 @@
 :root {
     --bg-color: #ffffff;
-    --text-color: #333333;
-    --block-bg-color: #f0f0f0;
-    --normal-bg-color: #e0e0e0;
-    --handle-color: #1a1a1a;
+    --text-color: #14171a;
+    --secondary-text-color: #657786;
+    --border-color: #e1e8ed;
+    --link-color: #1da1f2;
+    --button-color: #1da1f2;
+    --button-text-color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #1a1a1a;
-        --text-color: #f0f0f0;
-        --block-bg-color: #2a2a2a;
-        --normal-bg-color: #3a3a3a;
-        --handle-color: #ffffff;
+        --bg-color: #15202b;
+        --text-color: #ffffff;
+        --secondary-text-color: #8899a6;
+        --border-color: #38444d;
+        --link-color: #1da1f2;
+        --button-color: #1da1f2;
+        --button-text-color: #ffffff;
     }
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.3;
     color: var(--text-color);
     background-color: var(--bg-color);
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
 }
 
-.handle {
+#input-container {
+    padding: 15px;
+    padding-top: 70px;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+}
+
+#handle-input {
+    font-size: 20px;
     font-weight: bold;
-    margin-top: 20px;
-    color: var(--handle-color);
+    margin: 0;
+    border: 0px;
+    width: 100%;
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
-.content {
-    margin-left: 20px;
-    padding: 10px;
-    border-radius: 5px;
+#submit-handle {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
 }
 
-.block {
-    background-color: var(--block-bg-color);
+#profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
 }
 
-.statement {
-    font-style: italic;
+.profile-header {
+    position: relative;
+    height: 200px;
 }
 
+.profile-banner {
+    width: 100%;
+    height: 100%;
+    background-color: var(--link-color);
+}
+
+.profile-avatar {
+    position: absolute;
+    bottom: -60px;
+    left: 15px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--bg-color);
+    background-color: var(--bg-color);
+}
+
+.profile-info {
+    padding: 15px;
+    padding-top: 70px;
+}
+
+#profile-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#profile-handle {
+    font-size: 15px;
+    color: var(--secondary-text-color);
+    margin: 0;
+}
+
+#profile-bio {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.profile-stats {
+    display: flex;
+    margin-top: 10px;
+}
+
+.profile-stats span {
+    margin-right: 20px;
+    font-size: 14px;
+    color: var(--secondary-text-color);
+}
+
+#content-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+/* ... 保留之前的CSS ... */
+
+.tweet {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    overflow: hidden; /* 为渐变背景添加 */
+}
+
+.tweet-content {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* 自定义颜色类 */
+.green { background-color: #82a556; }
+.red { background-color: #ff6b6b; }
+.blue { background-color: #4d96ff; }
+.yellow { background-color: #feca57; }
+.purple { background-color: #9c88ff; }
+.orange { background-color: #ff9ff3; }
+
+/* 渐变背景 */
 .gradient {
-    color: white;
-    background: linear-gradient(to top, var(--color-dark), var(--color-light));
+    color: var(--bg-color); /* 确保文字在深色背景上可见 */
+    background: linear-gradient(to bottom right, var(--color-light), var(--color-dark));
+    padding: 15px;
 }
 
-.normal {
-    background-color: var(--normal-bg-color);
-}
-
+/* 为深色模式调整文字颜色 */
 @media (prefers-color-scheme: dark) {
+    .tweet:not(.gradient) {
+        color: var(--text-color);
+    }
     .gradient {
         color: var(--bg-color);
     }
