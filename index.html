@@ -7,27 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="profile-container" style="display: block;">
-        <div class="profile-header">
-            <div class="profile-banner"></div>
-            <div class="profile-avatar"></div>
-        </div>
-        <div id="input-container">
-            <input type="text" id="handle-input" placeholder="Enter username" pattern="[A-Za-z0-9]+" autocomplete="off" required>
-            <div class="profilebutton" id="submit-handle">Search</div>
-        </div>
-        <div class="profile-info" id="profile-info">
-            <div class="profilebutton" id="change-handle">Change</div>
-            <h1 id="profile-name"></h1>
-            <p id="profile-handle"></p>
-            <p id="profile-bio"></p>
-            <div class="profile-stats">
-                <span id="following-count"></span>
-                <span id="followers-count"></span>
+    <main>
+        <div id="profile-container" style="display: block;">
+            <div class="profile-header">
+                <div class="profile-banner"></div>
+                <div class="profile-avatar"></div>
+            </div>
+            <div id="input-container">
+                <div class="inputbar">
+                    <div class="text">@</div>
+                    <input type="text" id="handle-input" placeholder="UserID" autocomplete="off" required>
+                </div>
+                <div class="profilebutton" id="submit-handle">Search</div>
+            </div>
+            <div class="profile-info" id="profile-info">
+                <div class="profilebutton" id="change-handle">Change</div>
+                <h1 id="profile-name"></h1>
+                <p id="profile-handle"></p>
+                <div class="bio biotransition" id="profile-bio">
+                    <p id="profile-bio-info"></p>
+                    <div class="profile-stats">
+                        <span id="following-count"></span>
+                        <span id="followers-count"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="classindicator">
+                <div class="class selected" id="class-content">内容</div>
+                <div class="class" id="class-config">设置</div>
+                <div class="class-decept"></div>
             </div>
         </div>
-    </div>
-    <div id="content-container" style="display: none;"></div>
+        <div id="content-container" style="display: none;"></div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
