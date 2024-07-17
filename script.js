@@ -106,10 +106,14 @@ function displayProfile(handle) {
     hiddenAccountMessage.style.display = 'none';
     unsupportedAccountMessage.style.display = 'none';
 
-    if (contentData && contentData[handle]) {
-        const userData = contentData[handle];
+    // Convert handle to lowercase for case-insensitive matching
+    const lowerHandle = handle.toLowerCase();
+    const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
+
+    if (matchedHandle) {
+        const userData = contentData[matchedHandle];
         
-        profileHandle.textContent = `@${handle}`;
+        profileHandle.textContent = `@${handle}`; // Use original input for display
         
         if (userData.status === 'hidden' || userData.status === 'notsupported') {
             profileName.textContent = `@${handle}`;
@@ -137,8 +141,12 @@ function displayContent(handle) {
     contentContainer.innerHTML = '';
     contentContainer.style.display = 'block';
     
-    if (contentData && contentData[handle]) {
-        const userData = contentData[handle];
+    // Convert handle to lowercase for case-insensitive matching
+    const lowerHandle = handle.toLowerCase();
+    const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
+    
+    if (matchedHandle) {
+        const userData = contentData[matchedHandle];
         
         if (userData.status === 'hidden' || userData.status === 'notsupported') {
             contentContainer.style.display = 'none';
@@ -189,8 +197,12 @@ function handleSubmit() {
         displayProfile(handle);
         displayContent(handle);
         
+        // Convert handle to lowercase for case-insensitive matching
+        const lowerHandle = handle.toLowerCase();
+        const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
+        
         // Check if the account is normal and show/hide classindicator accordingly
-        if (contentData && contentData[handle] && contentData[handle].status !== 'hidden' && contentData[handle].status !== 'notsupported') {
+        if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
             classIndicator.style.display = 'flex';
         } else {
             classIndicator.style.display = 'none';

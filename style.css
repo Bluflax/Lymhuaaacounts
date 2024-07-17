@@ -253,6 +253,13 @@ input {
     }
 }
 
+@media (max-width: 600px) {
+    main {
+        height: fit-content;
+        border: none;
+    }
+}
+
 @font-face {
     font-family: 'Electrolize';
     src: url('assets/font/electrolize.ttf') format('truetype');
