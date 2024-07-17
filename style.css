@@ -10,7 +10,8 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #15202b;
+        --bgnotused-color: #15202b;
+        --bg-color: #050505;
         --text-color: #ffffff;
         --secondary-text-color: #8899a6;
         --border-color: #38444d;
@@ -21,12 +22,16 @@
 }
 
 body {
-    font-family: 'Electrolize';
+    font-family: 'Chirp';
     line-height: 1.3;
     color: var(--text-color);
     background-color: var(--bg-color);
     margin: 0;
     padding: 0;
+}
+
+input {
+    font-family: 'Chirp';
 }
 
 #input-container {
@@ -63,18 +68,26 @@ body {
     right: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: var(--button-color);
-    color: var(--button-text-color);
     border: none;
     border-radius: 9999px;
     cursor: pointer;
+}
+
+#submit-handle {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+}
+
+#change-handle {
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 #profile-container {
     max-width: 600px;
     margin: 0 auto;
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 0px;
     overflow: hidden;
 }
 
@@ -111,6 +124,7 @@ body {
     height: 25px;
     font-size: 20px;
     font-weight: bold;
+    line-height: 1.27;
     margin: 0;
 }
 
@@ -141,11 +155,10 @@ body {
     margin: 20px auto;
 }
 
-/* ... 保留之前的CSS ... */
 
 .tweet {
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 0px;
     padding: 15px;
     margin-bottom: 15px;
     overflow: hidden; /* 为渐变背景添加 */

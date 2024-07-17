@@ -93,6 +93,7 @@ function displayProfile(handle) {
 function displayContent(handle) {
     const contentContainer = document.getElementById('content-container');
     contentContainer.innerHTML = '';
+    contentContainer.style.display = 'block';
     
     if (contentData && contentData[handle]) {
         contentData[handle].tweets.forEach(tweet => {
@@ -139,10 +140,24 @@ function handleSubmit() {
     }
 }
 
+function backtoinput() {
+    const profileInfo = document.getElementById('profile-info');
+    const inputContainer = document.getElementById('input-container');
+    const contentContainer = document.getElementById('content-container');
+    const handleInput = document.getElementById('handle-input');
+    
+    profileInfo.style.display = 'none';
+    inputContainer.style.display = 'block';
+    contentContainer.style.display = 'none';
+    handleInput.focus();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchContent();
     
     const submitButton = document.getElementById('submit-handle');
+    const changeButton = document.getElementById('change-handle');
+    changeButton.addEventListener('click', backtoinput);
     submitButton.addEventListener('click', handleSubmit);
     
     const handleInput = document.getElementById('handle-input');
