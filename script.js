@@ -76,17 +76,16 @@ function displayProfile(handle) {
     const profileContainer = document.getElementById('profile-container');
     const profileName = document.getElementById('profile-name');
     const profileHandle = document.getElementById('profile-handle');
-    const profileBio = document.getElementById('profile-bio');
+    const profileBioInfo = document.getElementById('profile-bio-info');
     const followingCount = document.getElementById('following-count');
     const followersCount = document.getElementById('followers-count');
 
     profileName.textContent = handle; // Using handle as name for demonstration
     profileHandle.textContent = `@${handle}`;
-    profileBio.textContent = 'This is a sample bio for the user.'; // Sample bio
+    profileBioInfo.textContent = 'This is a sample bio for the user.'; // Sample bio
     followingCount.textContent = 'Following: 100'; // Sample following count
     followersCount.textContent = 'Followers: 200'; // Sample followers count
-
-    profileContainer.style.display = 'block';
+    
 }
 
 
