@@ -32,6 +32,7 @@ body {
 
 main {
     max-width: 600px;
+    height: 100vh;
     margin: 0 auto;
     overflow: hidden;
     border-left: 1px solid var(--border-color);
@@ -63,8 +64,8 @@ input {
 .text {
     font-size: 20px;
     font-weight: 700;
-    margin-right: 1px;
-    transform: translateY(-1px);
+    margin: 0;
+    transform: translateY(-0.5px);
 }
 
 #handle-input {
@@ -143,6 +144,10 @@ input {
     padding-top: 70px;
 }
 
+.loaded {
+    transform: translateY(0px);
+}
+
 #profile-name {
     height: 25px;
     font-size: 20px;
@@ -157,8 +162,13 @@ input {
     margin: 0;
 }
 
+.profile-detail {
+    position: relative;
+    padding: 15px;
+    padding-top: 0;
+}
 
-#profile-bio {
+#profile-bio-info {
     margin-top: 10px;
     font-size: 15px;
 }
@@ -175,7 +185,7 @@ input {
 }
 
 .classindicator {
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
@@ -240,6 +250,13 @@ input {
     }
     .gradient {
         color: var(--bg-color);
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        height: fit-content;
+        border: none;
     }
 }
 

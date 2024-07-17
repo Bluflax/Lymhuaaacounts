@@ -3,40 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lymahuaa Profile</title>
+    <title>User Profile</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main>
+    <main role="main">
         <div id="profile-container" style="display: block;">
             <div class="profile-header">
                 <div class="profile-banner"></div>
                 <div class="profile-avatar"></div>
             </div>
+
             <div id="input-container">
                 <div class="inputbar">
                     <div class="text">@</div>
-                    <input type="text" id="handle-input" placeholder="UserID" autocomplete="off" required>
+                    <input type="text" id="handle-input" placeholder="Enter handle" onkeypress="return event.charCode != 32" autocomplete="off">
                 </div>
-                <div class="profilebutton" id="submit-handle">Search</div>
+                <div id="submit-handle" class="profilebutton">Search</div>
             </div>
-            <div class="profile-info" id="profile-info">
-                <div class="profilebutton" id="change-handle">Change</div>
+
+            <div id="profile-info" class="profile-info">
+                <div id="change-handle" class="profilebutton">Change</div>
                 <h1 id="profile-name"></h1>
                 <p id="profile-handle"></p>
-                <div class="bio biotransition" id="profile-bio">
-                    <p id="profile-bio-info"></p>
+                
+            </div>
+            <div class="profileanimated" id="profileanimated">
+                <div class="profile-detail" id="profile-detail">
+                    <p id="profile-bio-info" class="bio biotransition"></p>
                     <div class="profile-stats">
                         <span id="following-count"></span>
                         <span id="followers-count"></span>
                     </div>
                 </div>
+                <div class="classindicator">
+                    <div id="class-content" class="class selected">内容</div>
+                    <div id="class-config" class="class">设置</div>
+                    <div class="class-decept"></div>
+                </div>
             </div>
-            <div class="classindicator">
-                <div class="class selected" id="class-content">内容</div>
-                <div class="class" id="class-config">设置</div>
-                <div class="class-decept"></div>
-            </div>
+        </div>
+        <div id="hidden-account-message" style="display: none; text-align: center; font-weight: bold; font-size: 1.5em; margin-top: 20px;">
+            Cannot find your account.
+        </div>
+
+        <div id="unsupported-account-message" style="display: none; text-align: center; font-weight: bold; font-size: 1.5em; margin-top: 20px;">
+            Not supported
         </div>
         <div id="content-container" style="display: none;"></div>
     </main>
