@@ -124,13 +124,16 @@ function displayContent(handle) {
     }
 }
 
-// ... 保留其余的代码 ...
 
 function handleSubmit() {
     const handleInput = document.getElementById('handle-input');
     const handle = handleInput.value.trim();
+    const profileInfo = document.getElementById('profile-info');
+    const inputContainer = document.getElementById('input-container');
     
     if (handle) {
+        profileInfo.style.display = 'block';
+        inputContainer.style.display = 'none';
         displayProfile(handle);
         displayContent(handle);
     }
