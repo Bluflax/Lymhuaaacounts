@@ -17,7 +17,7 @@
             <div id="input-container">
                 <div class="inputbar">
                     <div class="text">@</div>
-                    <input type="text" id="handle-input" placeholder="Enter handle" autocomplete="off">
+                    <input type="text" id="handle-input" placeholder="Enter handle" onkeypress="return event.charCode != 32" autocomplete="off">
                 </div>
                 <div id="submit-handle" class="profilebutton">Search</div>
             </div>
