@@ -21,7 +21,7 @@
 }
 
 body {
-    font-family: 'Chirp', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Electrolize';
     line-height: 1.3;
     color: var(--text-color);
     background-color: var(--bg-color);
@@ -44,6 +44,7 @@ body {
     font-weight: bold;
     margin: 0;
     padding: 0;
+    line-height: 1;
     border: 0px;
     width: 100%;
     height: 25px;
@@ -181,22 +182,29 @@ body {
 }
 
 @font-face {
-    font-family: 'Chirp';
-    src: url('assets\font\Chirp-Regular.woff2') format('woff2');
+    font-family: 'Electrolize';
+    src: url('assets/font/electrolize.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Chirp';
-    src: url('assets\font\Chirp-Medium.woff2') format('woff2');
+    src: url('assets/font/Chirp-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chirp';
+    src: url('assets/font/Chirp-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Chirp';
-    src: url('assets\font\Chirp-Bold.woff2') format('woff2');
+    src: url('assets/font/Chirp-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
