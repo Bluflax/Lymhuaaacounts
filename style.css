@@ -48,7 +48,7 @@ body {
     color: var(--text-color);
 }
 
-#submit-handle {
+.profilebutton {
     padding: 10px 20px;
     font-size: 16px;
     background-color: var(--button-color);
