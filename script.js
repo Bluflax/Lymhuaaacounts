@@ -28,7 +28,7 @@ function getBaseColor(colorStyle) {
 let contentData = null;
 
 async function fetchContent() {
-    const url = 'https://app.simplenote.com/publish/L965Ft';
+    const url = 'https://app.simplenote.com/publish/HGCwdm';
     const proxyUrl = 'https://api.allorigins.win/get?url=';
     
     try {
