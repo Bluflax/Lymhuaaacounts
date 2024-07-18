@@ -83,7 +83,7 @@ async function fetchContent() {
         });
     } catch (error) {
         console.error('Error fetching content:', error);
-        document.getElementById('content-container').textContent = 'Error loading content. Please try again later.';
+        document.getElementById('hidden-account-message').textContent = 'Error loading content. Please try again later.';
     }
 }
 
