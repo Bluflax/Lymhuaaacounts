@@ -231,10 +231,12 @@ input {
     width: 45px;
     height: 30px;
     font-weight: 500;
+    opacity: 0.3;
     border-bottom: 3px solid #00000000;
 }
 
 .class.selected {
+    opacity: 1;
     border-bottom: 3px solid var(--button-color);
 }
 
