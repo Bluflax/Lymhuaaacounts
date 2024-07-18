@@ -6,6 +6,7 @@
     --link-color: #1da1f2;
     --button-color: #1da1f2;
     --button-text-color: #ffffff;
+    --default-color: #d1d9dd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
         --link-color: #1da1f2;
         --button-color: #1da1f2;
         --button-text-color: #ffffff;
+        --default-color: #343639;
     }
 }
 
@@ -28,6 +30,7 @@ body {
     background-color: var(--bg-color);
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 main {
@@ -44,6 +47,7 @@ input {
 }
 
 #input-container {
+    z-index: 1;
     position: relative;
     padding: 15px;
     padding-top: 70px;
@@ -91,7 +95,7 @@ input {
     top: 20px;
     right: 20px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     border: none;
     border-radius: 9999px;
@@ -117,30 +121,32 @@ input {
 
 .profile-header {
     position: relative;
-    height: 200px;
+    height: 100px;
 }
 
 .profile-banner {
     width: 100%;
     height: 100%;
-    background-color: var(--link-color);
+    background-color: var(--default-color);
 }
 
 .profile-avatar {
+    z-index: 2;
     position: absolute;
-    bottom: -60px;
+    bottom: -55px;
     left: 15px;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border: 4px solid var(--bg-color);
-    background-color: var(--bg-color);
+    background-color: var(--default-color);
 }
 
 .profile-info {
     display: none;
     position: relative;
     padding: 15px;
+    padding-bottom: 0px;
     padding-top: 70px;
 }
 
@@ -160,38 +166,65 @@ input {
     font-size: 15px;
     color: var(--secondary-text-color);
     margin: 0;
+    margin-top: 1px;
 }
 
 .profile-detail {
     position: relative;
-    padding: 15px;
+    padding-left: 15px;
     padding-top: 0;
+    opacity: 1;
+    transform: translateY(0px);
+    transition: opacity 0.18s ease-in, transform 0.1s ease-in;
+}
+
+.profile-detail.animated {
+    opacity: 0;
+    transform: translateY(-20px);
 }
 
 #profile-bio-info {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 15px;
 }
 
 
 .profile-stats {
+    font-size: 13px;
+    padding-left: 15px;
     display: flex;
 }
 
 .profile-stats span {
     margin-right: 10px;
-    font-size: 14px;
     color: var(--secondary-text-color);
 }
 
-.classindicator {
+.profilefixed {
     display: none;
+    position: relative;
+    padding: 0;
+    padding-top: 0;
+    height: 65px;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateY(0px);
+    transition: transform 0.18s ease-in;
+}
+
+.classindicator {
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
     text-align: center;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
+}
+
+.profilefixed.animated {
+    transform: translateY(-50px);
 }
 
 .class {
@@ -209,6 +242,8 @@ input {
     width: calc(100% - 200px);
     max-width: 400px;
 }
+
+
 
 #content-container {
     max-width: 600px;
