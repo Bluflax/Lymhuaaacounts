@@ -186,7 +186,9 @@ function handleSubmit() {
     const handleInput = document.getElementById('handle-input');
     const handle = handleInput.value.trim();
     const profileInfo = document.getElementById('profile-info');
+    const profileDetail = document.getElementById('profile-detail');
     const profileAnimated = document.getElementById('profileanimated');
+    const profileFixed = document.getElementById('profilefixed');
     const inputContainer = document.getElementById('input-container');
     const classIndicator = document.querySelector('.classindicator');
     
@@ -194,8 +196,17 @@ function handleSubmit() {
         profileInfo.style.display = 'block';
         profileAnimated.style.display = 'block';
         inputContainer.style.display = 'none';
+        
+        // Force a reflow before removing the 'animated' class
+        void profileDetail.offsetWidth;
+        void profileFixed.offsetWidth;
+        
+        profileDetail.classList.remove('animated');
         displayProfile(handle);
-        displayContent(handle);
+        setTimeout(() => {
+            displayContent(handle);
+        }, 300);
+        
         
         // Convert handle to lowercase for case-insensitive matching
         const lowerHandle = handle.toLowerCase();
@@ -203,16 +214,21 @@ function handleSubmit() {
         
         // Check if the account is normal and show/hide classindicator accordingly
         if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
-            classIndicator.style.display = 'flex';
+            profileFixed.style.display = 'flex';
+            // Force a reflow before removing the 'animated' class
+            void profileFixed.offsetWidth;
+            profileFixed.classList.remove('animated');
         } else {
-            classIndicator.style.display = 'none';
+            profileFixed.style.display = 'none';
         }
     }
 }
 
 function backtoinput() {
     const profileInfo = document.getElementById('profile-info');
+    const profileDetail = document.getElementById('profile-detail');
     const profileAnimated = document.getElementById('profileanimated');
+    const profileFixed = document.getElementById('profilefixed');
     const inputContainer = document.getElementById('input-container');
     const contentContainer = document.getElementById('content-container');
     const handleInput = document.getElementById('handle-input');
@@ -226,7 +242,14 @@ function backtoinput() {
     profileAnimated.style.display = 'none';
     inputContainer.style.display = 'block';
     contentContainer.style.display = 'none';
-    classIndicator.style.display = 'none';  // Hide classindicator when going back to input
+    
+    // Force a reflow before adding the 'animated' class
+    void profileDetail.offsetWidth;
+    void classIndicator.offsetWidth;
+    
+    profileDetail.classList.add('animated');
+    profileFixed.style.display = 'none';
+    profileFixed.classList.add('animated');
     handleInput.focus();
 }
 
@@ -239,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitButton.addEventListener('click', handleSubmit);
     
     const handleInput = document.getElementById('handle-input');
+    handleInput.focus();
     handleInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             handleSubmit();
