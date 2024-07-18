@@ -11,8 +11,8 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bgnotused-color: #000000;
-        --bg-color: #050505;
+        --bgnotused-color: #15202b;
+        --bg-color: #000000;
         --text-color: #ffffff;
         --secondary-text-color: #8899a6;
         --border-color: #38444d;
