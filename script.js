@@ -126,8 +126,8 @@ function displayProfile(handle) {
         } else {
             profileName.textContent = userData.username;
             profileBioInfo.textContent = userData.info.bio || '';
-            detail2.textContent = '📆 Joined ' + userData.joinDate || '';
-            detail1.textContent = 'en-US'; // Sample followers count
+            detail1.textContent = '📆 Joined ' + userData.joinDate || '';
+            detail2.textContent = ''; // Sample followers count
         }
     } else {
         // Treat unmatched accounts as hidden

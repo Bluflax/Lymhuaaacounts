@@ -12,7 +12,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bgnotused-color: #15202b;
-        --bg-color: #050505;
+        --bg-color: #000000;
         --text-color: #ffffff;
         --secondary-text-color: #8899a6;
         --border-color: #38444d;
@@ -192,12 +192,12 @@ input {
 
 .profile-stats {
     font-size: 13px;
-    padding-left: 15px;
+    padding-left: 5px;
     display: flex;
 }
 
 .profile-stats span {
-    margin-right: 10px;
+    margin-left: 10px;
     color: var(--secondary-text-color);
 }
 
@@ -231,10 +231,12 @@ input {
     width: 45px;
     height: 30px;
     font-weight: 500;
+    opacity: 0.3;
     border-bottom: 3px solid #00000000;
 }
 
 .class.selected {
+    opacity: 1;
     border-bottom: 3px solid var(--button-color);
 }
 
