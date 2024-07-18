@@ -192,12 +192,12 @@ input {
 
 .profile-stats {
     font-size: 13px;
-    padding-left: 15px;
+    padding-left: 5px;
     display: flex;
 }
 
 .profile-stats span {
-    margin-right: 10px;
+    margin-left: 10px;
     color: var(--secondary-text-color);
 }
 
