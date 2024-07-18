@@ -57,6 +57,7 @@ async function fetchContent() {
                 contentData[handle] = {
                     username: handlePart[1].split('=')[1],
                     status: handlePart[2].split('=')[1],
+                    joinDate: handlePart[3].split('=')[1],
                     info: {},
                     tweets: []
                 };
@@ -92,8 +93,8 @@ function displayProfile(handle) {
     const profileName = document.getElementById('profile-name');
     const profileHandle = document.getElementById('profile-handle');
     const profileBioInfo = document.getElementById('profile-bio-info');
-    const followingCount = document.getElementById('following-count');
-    const followersCount = document.getElementById('followers-count');
+    const detail1 = document.getElementById('profile-detail1');
+    const detail2 = document.getElementById('profile-detail2');
     const hiddenAccountMessage = document.getElementById('hidden-account-message');
     const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
 
@@ -101,8 +102,8 @@ function displayProfile(handle) {
     profileName.textContent = '';
     profileHandle.textContent = '';
     profileBioInfo.textContent = '';
-    followingCount.textContent = '';
-    followersCount.textContent = '';
+    detail1.textContent = '';
+    detail2.textContent = '';
     hiddenAccountMessage.style.display = 'none';
     unsupportedAccountMessage.style.display = 'none';
 
@@ -125,8 +126,8 @@ function displayProfile(handle) {
         } else {
             profileName.textContent = userData.username;
             profileBioInfo.textContent = userData.info.bio || '';
-            followingCount.textContent = 'Following: 100'; // Sample following count
-            followersCount.textContent = 'Followers: 200'; // Sample followers count
+            detail2.textContent = '📆 Joined ' + userData.joinDate || '';
+            detail1.textContent = 'en-US'; // Sample followers count
         }
     } else {
         // Treat unmatched accounts as hidden
