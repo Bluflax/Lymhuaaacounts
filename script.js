@@ -256,6 +256,7 @@ function backtoinput() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchContent();
     
+    const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
     const changeButton = document.getElementById('change-handle');
     changeButton.addEventListener('click', backtoinput);
@@ -266,6 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
     handleInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             handleSubmit();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Backspace' && inputContainer.style.display === 'none') {
+            backtoinput();
         }
     });
 });

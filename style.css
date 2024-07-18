@@ -6,7 +6,7 @@
     --link-color: #1da1f2;
     --button-color: #1da1f2;
     --button-text-color: #ffffff;
-    --default-color: #343639;
+    --default-color: #d1d9dd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +19,7 @@
         --link-color: #1da1f2;
         --button-color: #1da1f2;
         --button-text-color: #ffffff;
+        --default-color: #343639;
     }
 }
 
@@ -94,7 +95,7 @@ input {
     top: 20px;
     right: 20px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     border: none;
     border-radius: 9999px;
@@ -165,6 +166,7 @@ input {
     font-size: 15px;
     color: var(--secondary-text-color);
     margin: 0;
+    margin-top: 1px;
 }
 
 .profile-detail {
@@ -189,13 +191,13 @@ input {
 
 
 .profile-stats {
+    font-size: 13px;
     padding-left: 15px;
     display: flex;
 }
 
 .profile-stats span {
     margin-right: 10px;
-    font-size: 14px;
     color: var(--secondary-text-color);
 }
 
