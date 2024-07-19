@@ -288,7 +288,7 @@ function backtoinput() {
     profileDetail.classList.add('animated');
     profileFixed.style.display = 'none';
     profileFixed.classList.add('animated');
-    showMessage('initial');
+    showMessage('none');
     handleInput.focus();
 }
 
