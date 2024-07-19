@@ -55,7 +55,7 @@ main {
 
 .mainanimated {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(-20px);
 }
 
 
