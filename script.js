@@ -204,7 +204,7 @@ function handleSubmit() {
         
         profileDetail.classList.remove('animated');
         displayProfile(handle);
-        setTimeout(() => {
+        displaycontentTimeout = setTimeout(() => {
             displayContent(handle);
         }, 300);
         
@@ -236,7 +236,9 @@ function backtoinput() {
     const hiddenAccountMessage = document.getElementById('hidden-account-message');
     const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
     const classIndicator = document.querySelector('.classindicator');
-    
+
+
+    clearTimeout(displayContentTimeout);
     hiddenAccountMessage.style.display = 'none';
     unsupportedAccountMessage.style.display = 'none';
     profileInfo.style.display = 'none';
