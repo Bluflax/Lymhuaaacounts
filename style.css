@@ -45,8 +45,9 @@ main {
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     opacity: 0;
+    transform-origin: center;
     transform: scale(0.8);
-    transition: opacity 0.2s ease-out, transform 0.5s cubic-bezier(0.000, 0.700, 0.000, 1.000);
+    transition: opacity 0.16s ease-out, transform 0.5s cubic-bezier(0.000, 0.700, 0.000, 1.000);
 }
 
 .mainanimated {
@@ -342,7 +343,7 @@ input {
     z-index: 1000;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 0.2s ease-out, transform 0.5s cubic-bezier(0, 0.2, 0, 1);
+    transition: opacity 0.16s ease-out, transform 0.5s cubic-bezier(0, 0.2, 0, 1);
 }
 
 #logo {
