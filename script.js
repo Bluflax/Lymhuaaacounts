@@ -262,7 +262,7 @@ function animateLogo() {
     const launch = document.getElementById('logo-overlay');
     setTimeout(() => {
         launch.classList.add('logoanimated');
-    }, 400);
+    }, 500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

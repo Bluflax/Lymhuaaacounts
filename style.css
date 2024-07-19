@@ -296,12 +296,13 @@ input {
     z-index: 1000;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 0.15s ease-in;
+    transition: opacity 0.2s ease-out;
 }
 
 #logo {
     width: 192px;
     height: 192px;
+    transform: translateY(-50px);
 }
 
 .logoanimated {
