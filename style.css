@@ -304,7 +304,7 @@ input {
     z-index: 1000;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0, 0, 0, 1);
+    transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0, 0.2, 0, 1);
 }
 
 #logo {
