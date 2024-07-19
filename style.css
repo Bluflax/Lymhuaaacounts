@@ -270,7 +270,8 @@ input {
     font-family: 'Chirp', sans-serif;
     text-align: left;
     margin-top: 60px;
-    padding-left: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .display-message-title {

@@ -267,15 +267,11 @@ function backtoinput() {
     const inputContainer = document.getElementById('input-container');
     const contentContainer = document.getElementById('content-container');
     const handleInput = document.getElementById('handle-input');
-    const hiddenAccountMessage = document.getElementById('hidden-account-message');
-    const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
     const classIndicator = document.querySelector('.classindicator');
 
     fetchContent();
 
     clearTimeout(displaycontentTimeout);
-    hiddenAccountMessage.style.display = 'none';
-    unsupportedAccountMessage.style.display = 'none';
     profileInfo.style.display = 'none';
     profileAnimated.style.display = 'none';
     inputContainer.style.display = 'block';
