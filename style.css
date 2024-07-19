@@ -383,7 +383,7 @@ main {
         border: none;
     }
     #handle-input {
-        transform: translateY(0.8px);
+        transform: translateY(0.2px);
     }
 }
 
