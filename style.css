@@ -55,9 +55,6 @@ main {
     transform: scale(1);
 }
 
-input {
-    font-family: 'Chirp';
-}
 
 #input-container {
     z-index: 1;
@@ -86,8 +83,8 @@ input {
 }
 
 #handle-input {
+    font-family: 'Chirp-bold', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Arial, sans-serif;
     font-size: 20px;
-    font-weight: bold;
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -108,7 +105,7 @@ input {
     top: 20px;
     right: 20px;
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     border: none;
     border-radius: 9999px;
@@ -175,9 +172,10 @@ input {
 }
 
 #profile-name {
+    font-family: 'Chirp-bold', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Arial, sans-serif;
+    font-weight: 400;
     height: 25px;
     font-size: 20px;
-    font-weight: 700;
     line-height: 1.27;
     margin: 0;
 }
@@ -350,6 +348,7 @@ input {
     width: 192px;
     height: 192px;
     transform: translateY(-40px);
+    filter: saturate(0.8) brightness(1.2);
 }
 
 .logoanimated {
@@ -398,6 +397,13 @@ input {
 
 @font-face {
     font-family: 'Chirp';
+    src: url('assets/font/Chirp-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chirp-bold';
     src: url('assets/font/Chirp-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
