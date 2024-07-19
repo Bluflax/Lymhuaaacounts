@@ -283,7 +283,7 @@ input {
 }
 
 
-#logo-overlay {
+.logo-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -295,6 +295,7 @@ input {
     align-items: center;
     z-index: 1000;
     opacity: 1;
+    pointer-events: none;
     transition: opacity 0.15s ease-in;
 }
 
@@ -303,18 +304,8 @@ input {
     height: 192px;
 }
 
-main {
+.logoanimated {
     opacity: 0;
-    transition: opacity 0.3s ease-out;
-}
-
-body.loaded #logo-overlay {
-    opacity: 0;
-    pointer-events: none;
-}
-
-body.loaded main {
-    opacity: 1;
 }
 
 

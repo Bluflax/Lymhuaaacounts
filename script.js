@@ -259,8 +259,9 @@ function backtoinput() {
 }
 
 function animateLogo() {
+    const launch = document.getElementById('logo-overlay');
     setTimeout(() => {
-        document.body.classList.add('loaded');
+        launch.classList.add('logoanimated');
     }, 400);
 }
 
