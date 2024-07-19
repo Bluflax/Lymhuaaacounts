@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main role="main">
+    <div class="logo-overlay" id="logo-overlay">
+        <img src="assets/webapp/icon-512-new.png" alt="Logo" id="logo">
+    </div>
+    <main role="main" id="main">
         <div id="profile-container" style="display: block;">
             <div class="profile-header">
                 <div class="profile-banner"></div>
@@ -22,12 +25,12 @@
                     <div class="text">@</div>
                     <input type="text" id="handle-input" placeholder="UserID" onkeypress="return event.charCode != 32" autocomplete="off">
                 </div>
-                <div id="submit-handle" class="profilebutton">Confirm</div>
+                <div id="submit-handle" class="profilebutton submit-button forbidden">Confirm</div>
             </div>
 
             <div id="profile-info" class="profile-info">
-                <div id="change-handle" class="profilebutton">Edit</div>
-                <h1 id="profile-name"></h1>
+                <div id="change-handle" class="profilebutton change-button">Edit</div>
+                <h1 id="profile-name" onclick="backtoinput()"></h1>
                 <p id="profile-handle"></p>
             </div>
             <div class="profileanimated" id="profileanimated">
@@ -47,13 +50,17 @@
                 </div>
             </div>
         </div>
-        <div id="hidden-account-message" style="display: none; text-align: center; font-weight: bold; font-size: 1.5em; margin-top: 20px;">
-            Cannot find your account.
+        <div class="display-message" id="display-message" style="display: none;">
+            <h2 class="display-message-title" id="initial-state-title">Tell us your ID</h2>
+            <p class="display-message-description" id="initial-state-description">Use the @userID inputbox to find your profile.</p>
+            <div class="display-message-title" id="hidden-account-message" style="display: none;">
+                Cannot find your account.
+            </div>
+            <div class="display-message-title" id="unsupported-account-message" style="display: none;">
+                Not supported
+            </div>
         </div>
-
-        <div id="unsupported-account-message" style="display: none; text-align: center; font-weight: bold; font-size: 1.5em; margin-top: 20px;">
-            Not supported
-        </div>
+        
         <div id="content-container" style="display: none;"></div>
     </main>
     <script src="script.js"></script>

@@ -1,10 +1,12 @@
 :root {
     --bg-color: #ffffff;
     --text-color: #14171a;
+    --text-forbidden-color: #999;
     --secondary-text-color: #657786;
-    --border-color: #e1e8ed;
+    --border-color: #e1e8eda0;
     --link-color: #1da1f2;
     --button-color: #1da1f2;
+    --button-forbidden-color: #b0b0b0;
     --button-text-color: #ffffff;
     --default-color: #d1d9dd;
 }
@@ -14,10 +16,12 @@
         --bgnotused-color: #15202b;
         --bg-color: #000000;
         --text-color: #ffffff;
+        --text-forbidden-color: #808080;
         --secondary-text-color: #8899a6;
-        --border-color: #38444d;
+        --border-color: #38444da0;
         --link-color: #1da1f2;
         --button-color: #1da1f2;
+        --button-forbidden-color: #666;
         --button-text-color: #ffffff;
         --default-color: #343639;
     }
@@ -40,6 +44,14 @@ main {
     overflow: hidden;
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.2s ease-out, transform 0.5s cubic-bezier(0.000, 0.700, 0.000, 1.000);
+}
+
+.mainanimated {
+    opacity: 1;
+    transform: scale(1);
 }
 
 input {
@@ -102,14 +114,21 @@ input {
     cursor: pointer;
 }
 
-#submit-handle {
+
+.submit-button {
     background-color: var(--button-color);
     color: var(--button-text-color);
 }
 
-#change-handle {
+.change-button {
     background-color: var(--text-color);
     color: var(--bg-color);
+}
+
+.forbidden {
+    opacity: 0.3;
+    color: var(--text-color);
+    background-color: var(--button-forbidden-color);
 }
 
 #profile-container {
@@ -245,6 +264,33 @@ input {
     max-width: 400px;
 }
 
+.display-message {
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Chirp', sans-serif;
+    text-align: left;
+    margin-top: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.display-message-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 2px;
+}
+
+.display-message-description {
+    text-align: left;
+    margin-left: 15px;
+    font-size: 1em;
+    color: var(--secondary-text-color);
+    margin: 0;
+}
+
+#initial-state-title {
+    margin-top: 14.5px;
+}
 
 
 #content-container {
@@ -265,6 +311,8 @@ input {
     line-height: 1.5;
 }
 
+
+
 /* 自定义颜色类 */
 .green { background-color: #82a556; }
 .red { background-color: #ff6b6b; }
@@ -279,6 +327,35 @@ input {
     background: linear-gradient(to bottom right, var(--color-light), var(--color-dark));
     padding: 15px;
 }
+
+
+.logo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out, transform 0.5s cubic-bezier(0, 0.2, 0, 1);
+}
+
+#logo {
+    width: 192px;
+    height: 192px;
+    transform: translateY(-40px);
+}
+
+.logoanimated {
+    opacity: 0;
+    transform: scale(1.1) translateY(5px);
+}
+
 
 /* 为深色模式调整文字颜色 */
 @media (prefers-color-scheme: dark) {

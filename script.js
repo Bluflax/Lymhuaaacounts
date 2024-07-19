@@ -84,7 +84,37 @@ async function fetchContent() {
         });
     } catch (error) {
         console.error('Error fetching content:', error);
-        document.getElementById('hidden-account-message').textContent = 'Error loading content. Please try again later.';
+        document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
+    }
+}
+
+function showMessage(messageType) {
+    const Message = document.getElementById('display-message');
+    const hiddenAccountMessage = document.getElementById('hidden-account-message');
+    const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
+    const contentContainer = document.getElementById('content-container');
+
+    Message.style.display = 'flex';
+    hiddenAccountMessage.style.display = 'none';
+    unsupportedAccountMessage.style.display = 'none';
+    contentContainer.style.display = 'none';
+    document.getElementById('initial-state-title').style.display = 'none';
+            document.getElementById('initial-state-description').style.display = 'none';
+
+    switch (messageType) {
+        case 'initial':
+            document.getElementById('initial-state-title').style.display = 'block';
+            document.getElementById('initial-state-description').style.display = 'block';
+            break;
+        case 'hidden':
+            hiddenAccountMessage.style.display = 'block';
+            break;
+        case 'unsupported':
+            unsupportedAccountMessage.style.display = 'block';
+            break;
+        case 'none':
+            Message.style.display = 'none';
+
     }
 }
 
@@ -116,13 +146,12 @@ function displayProfile(handle) {
         
         profileHandle.textContent = `@${handle}`; // Use original input for display
         
-        if (userData.status === 'hidden' || userData.status === 'notsupported') {
+        if (userData.status === 'hidden') {
             profileName.textContent = `@${handle}`;
-            if (userData.status === 'hidden') {
-                hiddenAccountMessage.style.display = 'block';
-            } else {
-                unsupportedAccountMessage.style.display = 'block';
-            }
+            showMessage('hidden');
+        } else if (userData.status === 'notsupported') {
+            profileName.textContent = `@${handle}`;
+            showMessage('unsupported');
         } else {
             profileName.textContent = userData.username;
             profileBioInfo.textContent = userData.info.bio || '';
@@ -133,9 +162,11 @@ function displayProfile(handle) {
         // Treat unmatched accounts as hidden
         profileName.textContent = `@${handle}`;
         profileHandle.textContent = `@${handle}`;
-        hiddenAccountMessage.style.display = 'block';
+        showMessage('hidden');
     }
 }
+
+
 
 function displayContent(handle) {
     const contentContainer = document.getElementById('content-container');
@@ -183,6 +214,7 @@ function displayContent(handle) {
     }
 }
 
+
 function handleSubmit() {
     const handleInput = document.getElementById('handle-input');
     const handle = handleInput.value.trim();
@@ -191,12 +223,12 @@ function handleSubmit() {
     const profileAnimated = document.getElementById('profileanimated');
     const profileFixed = document.getElementById('profilefixed');
     const inputContainer = document.getElementById('input-container');
-    const classIndicator = document.querySelector('.classindicator');
     
     if (handle) {
         profileInfo.style.display = 'block';
         profileAnimated.style.display = 'block';
         inputContainer.style.display = 'none';
+        showMessage('none'); // Hide all messages
         
         // Force a reflow before removing the 'animated' class
         void profileDetail.offsetWidth;
@@ -204,10 +236,9 @@ function handleSubmit() {
         
         profileDetail.classList.remove('animated');
         displayProfile(handle);
-        setTimeout(() => {
+        displaycontentTimeout = setTimeout(() => {
             displayContent(handle);
         }, 300);
-        
         
         // Convert handle to lowercase for case-insensitive matching
         const lowerHandle = handle.toLowerCase();
@@ -222,8 +253,11 @@ function handleSubmit() {
         } else {
             profileFixed.style.display = 'none';
         }
+    } else {
+        showMessage('initial');
     }
 }
+
 
 function backtoinput() {
     const profileInfo = document.getElementById('profile-info');
@@ -233,12 +267,11 @@ function backtoinput() {
     const inputContainer = document.getElementById('input-container');
     const contentContainer = document.getElementById('content-container');
     const handleInput = document.getElementById('handle-input');
-    const hiddenAccountMessage = document.getElementById('hidden-account-message');
-    const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
     const classIndicator = document.querySelector('.classindicator');
-    
-    hiddenAccountMessage.style.display = 'none';
-    unsupportedAccountMessage.style.display = 'none';
+
+    fetchContent();
+
+    clearTimeout(displaycontentTimeout);
     profileInfo.style.display = 'none';
     profileAnimated.style.display = 'none';
     inputContainer.style.display = 'block';
@@ -251,11 +284,23 @@ function backtoinput() {
     profileDetail.classList.add('animated');
     profileFixed.style.display = 'none';
     profileFixed.classList.add('animated');
+    showMessage('none');
     handleInput.focus();
+}
+
+function animateLogo() {
+    const launch = document.getElementById('logo-overlay');
+    const main = document.getElementById('main');
+    setTimeout(() => {
+        launch.classList.add('logoanimated');
+        main.classList.add('mainanimated');
+    }, 500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchContent();
+    animateLogo();
+    showMessage('initial');
     
     const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
@@ -265,9 +310,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const handleInput = document.getElementById('handle-input');
     handleInput.focus();
-    handleInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            handleSubmit();
+    handleInput.addEventListener('input', () => {
+        if (handleInput.value.trim() === '') {
+            showMessage('initial');
+            submitButton.classList.add('forbidden');
+        } else {
+            submitButton.classList.remove('forbidden');
+            showMessage('none');
+            handleInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    handleSubmit();
+                }
+            });
         }
     });
 
