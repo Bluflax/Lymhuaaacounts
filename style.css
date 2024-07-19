@@ -382,6 +382,9 @@ main {
         height: fit-content;
         border: none;
     }
+    #handle-input {
+        transform: translateY(0.8px);
+    }
 }
 
 @font-face {
