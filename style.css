@@ -1,10 +1,12 @@
 :root {
     --bg-color: #ffffff;
     --text-color: #14171a;
+    --text-forbidden-color: #999;
     --secondary-text-color: #657786;
     --border-color: #e1e8eda0;
     --link-color: #1da1f2;
     --button-color: #1da1f2;
+    --button-forbidden-color: #b0b0b0;
     --button-text-color: #ffffff;
     --default-color: #d1d9dd;
 }
@@ -14,10 +16,12 @@
         --bgnotused-color: #15202b;
         --bg-color: #000000;
         --text-color: #ffffff;
+        --text-forbidden-color: #808080;
         --secondary-text-color: #8899a6;
         --border-color: #38444da0;
         --link-color: #1da1f2;
         --button-color: #1da1f2;
+        --button-forbidden-color: #666;
         --button-text-color: #ffffff;
         --default-color: #343639;
     }
@@ -110,14 +114,21 @@ input {
     cursor: pointer;
 }
 
-#submit-handle {
+
+.submit-button {
     background-color: var(--button-color);
     color: var(--button-text-color);
 }
 
-#change-handle {
+.change-button {
     background-color: var(--text-color);
     color: var(--bg-color);
+}
+
+.forbidden {
+    opacity: 0.3;
+    color: var(--text-color);
+    background-color: var(--button-forbidden-color);
 }
 
 #profile-container {
@@ -253,6 +264,32 @@ input {
     max-width: 400px;
 }
 
+.display-message {
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'Chirp', sans-serif;
+    text-align: left;
+    margin-top: 60px;
+    padding-left: 20px;
+}
+
+.display-message-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 2px;
+}
+
+.display-message-description {
+    text-align: left;
+    margin-left: 15px;
+    font-size: 1em;
+    color: var(--secondary-text-color);
+    margin: 0;
+}
+
+#initial-state-title {
+    margin-top: 14.5px;
+}
 
 
 #content-container {
@@ -315,7 +352,7 @@ input {
 
 .logoanimated {
     opacity: 0;
-    transform: scale(1.1) translateY(10px);
+    transform: scale(1.1) translateY(5px);
 }
 
 
