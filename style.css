@@ -310,7 +310,7 @@ input {
 #logo {
     width: 192px;
     height: 192px;
-    transform: translateY(-50px);
+    transform: translateY(-40px);
 }
 
 .logoanimated {
