@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="var(--default-color)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-startup-image" href="assets/webapp/launch-screen.png">
     <link rel="icon" type="image/png" href="assets/webapp/faviconfull.png">
     <link rel="manifest" href="manifest.json">
-    <title>Ly, Account</title>
+    <title>Ly, Account - Preview</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -52,7 +53,7 @@
             </div>
         </div>
         <div class="display-message" id="display-message" style="display: none;">
-            <h2 class="display-message-title" id="initial-state-title">Tell us your ID</h2>
+            <h2 class="display-message-title" id="initial-state-title" onclick="document.getElementById('handle-input').focus();">Tell us your ID</h2>
             <p class="display-message-description" id="initial-state-description">Use the @userID inputbox to find your profile.</p>
             <div class="display-message-title" id="hidden-account-message" style="display: none;">
                 Cannot find your account.
