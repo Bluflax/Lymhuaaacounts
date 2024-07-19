@@ -357,7 +357,7 @@ main {
 #logo {
     width: 192px;
     height: 192px;
-    transform: translateY(-40px);
+    transform: translateY(-20px);
     filter: saturate(0.8) brightness(1.2);
 }
 
