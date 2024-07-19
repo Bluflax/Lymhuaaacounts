@@ -84,7 +84,7 @@ async function fetchContent() {
         });
     } catch (error) {
         console.error('Error fetching content:', error);
-        document.getElementById('hidden-account-message').textContent = 'Error loading content. Please try again later.';
+        document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
     }
 }
 
@@ -238,6 +238,7 @@ function backtoinput() {
     const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
     const classIndicator = document.querySelector('.classindicator');
 
+    fetchContent();
 
     clearTimeout(displaycontentTimeout);
     hiddenAccountMessage.style.display = 'none';
@@ -257,8 +258,15 @@ function backtoinput() {
     handleInput.focus();
 }
 
+function animateLogo() {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 400);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchContent();
+    animateLogo();
     
     const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
