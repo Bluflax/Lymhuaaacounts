@@ -59,8 +59,8 @@ main {
 #input-container {
     z-index: 1;
     position: relative;
-    padding: 15px;
-    padding-top: 60px;
+    padding: 10px;
+    padding-top: 51px;
     background-color: var(--bg-color);
     display: flex;
     justify-content: flex-start;
@@ -79,7 +79,7 @@ main {
     font-size: 21px;
     font-weight: 700;
     margin: 0;
-    transform: translateY(-0px);
+    transform: translateY(-0.5px);
 }
 
 #handle-input {
@@ -94,7 +94,6 @@ main {
     height: 25px;
     background: var(--bg-color);
     color: var(--text-color);
-    transform: translateY(0.5px);
 }
 
 #handle-input:focus {
