@@ -209,6 +209,7 @@ function handleSubmit() {
         }, 300);
         
         
+        
         // Convert handle to lowercase for case-insensitive matching
         const lowerHandle = handle.toLowerCase();
         const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
@@ -238,7 +239,7 @@ function backtoinput() {
     const classIndicator = document.querySelector('.classindicator');
 
 
-    clearTimeout(displayContentTimeout);
+    clearTimeout(displaycontentTimeout);
     hiddenAccountMessage.style.display = 'none';
     unsupportedAccountMessage.style.display = 'none';
     profileInfo.style.display = 'none';
