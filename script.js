@@ -260,9 +260,13 @@ function backtoinput() {
 
 function animateLogo() {
     const launch = document.getElementById('logo-overlay');
+    const main = document.getElementById('main');
     setTimeout(() => {
         launch.classList.add('logoanimated');
     }, 500);
+    setTimeout(() => {
+        main.classList.add('mainanimated');
+    }, 550);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

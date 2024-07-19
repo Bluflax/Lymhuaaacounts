@@ -40,6 +40,14 @@ main {
     overflow: hidden;
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0.000, 0.700, 0.000, 1.000);
+}
+
+.mainanimated {
+    opacity: 1;
+    transform: scale(1);
 }
 
 input {
@@ -296,7 +304,7 @@ input {
     z-index: 1000;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 0.2s ease-out;
+    transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0, 0, 0, 1);
 }
 
 #logo {
@@ -307,6 +315,7 @@ input {
 
 .logoanimated {
     opacity: 0;
+    transform: scale(1.2) translateY(10px);
 }
 
 
