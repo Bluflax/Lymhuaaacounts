@@ -13,8 +13,8 @@
         "type": "image/png"
       }
     ],
-    "start_url": "https://preview.account.lymahuaa.icu",
+    "start_url": "index.html",
     "display": "standalone",
-    "theme_color": "var(--link-color)",
-    "background_color": "var(--default-color)"
+    "theme_color": "#1da1f2",
+    "background_color": ""
   }
