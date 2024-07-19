@@ -84,6 +84,7 @@ main {
 
 #handle-input {
     font-family: 'Chirp-bold', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Arial, sans-serif;
+    font-weight: 500;
     font-size: 20px;
     margin: 0;
     padding: 0;
@@ -173,7 +174,7 @@ main {
 
 #profile-name {
     font-family: 'Chirp-bold', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     height: 25px;
     font-size: 20px;
     line-height: 1.27;
