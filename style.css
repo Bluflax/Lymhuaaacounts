@@ -315,7 +315,7 @@ input {
 
 .logoanimated {
     opacity: 0;
-    transform: scale(1.2) translateY(10px);
+    transform: scale(1.1) translateY(10px);
 }
 
 
