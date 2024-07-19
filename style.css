@@ -76,7 +76,7 @@ main {
 }
 
 .text {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 700;
     margin: 0;
     transform: translateY(-0.5px);
@@ -85,7 +85,7 @@ main {
 #handle-input {
     font-family: 'Chirp-bold', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Arial, sans-serif;
     font-weight: 500;
-    font-size: 21px;
+    font-size: 22px;
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -105,8 +105,8 @@ main {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 7px 14px;
+    font-size: 13.5px;
     font-weight: 500;
     border: none;
     border-radius: 9999px;
@@ -176,16 +176,16 @@ main {
     font-family: 'Chirp-bold', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Arial, sans-serif;
     font-weight: 600;
     height: 25px;
-    font-size: 21px;
+    font-size: 22px;
     line-height: 1.27;
     margin: 0;
 }
 
 #profile-handle {
-    font-size: 13.5px;
+    font-size: 14px;
     color: var(--secondary-text-color);
     margin: 0;
-    margin-top: 5px;
+    margin-top: 3px;
 }
 
 .profileanimated {
@@ -209,7 +209,7 @@ main {
 #profile-bio-info {
     margin-top: 10px;
     margin-bottom: 8px;
-    font-size: 13.5px;
+    font-size: 14px;
 }
 
 
@@ -312,7 +312,7 @@ main {
 }
 
 .tweet-content {
-    font-size: 13.5px;
+    font-size: 14px;
     line-height: 1.5;
 }
 
