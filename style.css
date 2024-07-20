@@ -141,6 +141,7 @@ main {
     margin: 0 auto;
     border-radius: 0px;
     overflow: hidden;
+    transition: opacity 0.2s ease-out;
 }
 
 .profile-header {

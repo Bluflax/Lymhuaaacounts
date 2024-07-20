@@ -270,6 +270,7 @@ const launchdelay = {
 function loadLastHandle() {
     const lastHandle = localStorage.getItem('lastHandle');
     const profile = document.getElementById('profile-container');
+    const submitButton = document.getElementById('submit-handle');
     if (lastHandle) {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
@@ -277,6 +278,7 @@ function loadLastHandle() {
         launchdelay.delay = 1100;
         profile.style.opacity = '0.5';
         profile.style.pointerEvents = 'none';
+        submitButton.classList.remove('forbidden');
         showMessage('none');
         setTimeout(() => {
             handleSubmit();
@@ -340,7 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (handleInput.value.trim() === '') {
             showMessage('initial');
             submitButton.classList.add('forbidden');
-            // Clear localStorage when input is cleared
             localStorage.removeItem('lastHandle');
         } else {
             submitButton.classList.remove('forbidden');
