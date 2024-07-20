@@ -263,14 +263,26 @@ function handleSubmit() {
     }
 }
 
+const launchdelay = {
+    delay: 400
+};
+
 function loadLastHandle() {
     const lastHandle = localStorage.getItem('lastHandle');
+    const profile = document.getElementById('profile-container');
     if (lastHandle) {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
+        handleInput.blur();
+        launchdelay.delay = 1100;
+        profile.style.opacity = '0.5';
+        profile.style.pointerEvents = 'none';
+        showMessage('none');
         setTimeout(() => {
-        handleSubmit();
-        }, 1100);
+            handleSubmit();
+            profile.style.opacity = '1';
+            profile.style.pointerEvents = 'auto';
+        }, 1600);
     }
 }
 
@@ -310,13 +322,11 @@ function animateLogo() {
     setTimeout(() => {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
-    }, 600);
+    }, launchdelay.delay);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchContent();
-    animateLogo();
-    showMessage('initial');
     
     const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
@@ -349,7 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
             backtoinput();
         }
     });
-
-    // Load the last handle when the app starts
+    
+    showMessage('initial');
     loadLastHandle();
+    animateLogo();
+    
 });
