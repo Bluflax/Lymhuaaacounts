@@ -300,7 +300,7 @@ main {
 }
 
 #initial-state-title {
-    margin-top: 14.5px;
+    margin-top: 5px;
 }
 
 
@@ -360,7 +360,7 @@ main {
     width: 192px;
     height: 192px;
     transform: translateY(-20px);
-    filter: saturate(0.8) brightness(1.2);
+    filter: saturate(0.8) brightness(1);
 }
 
 .logoanimated {

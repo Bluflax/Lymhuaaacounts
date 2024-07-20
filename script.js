@@ -225,6 +225,9 @@ function handleSubmit() {
     const inputContainer = document.getElementById('input-container');
     
     if (handle) {
+        // Save the handle to localStorage
+        localStorage.setItem('lastHandle', handle);
+
         profileInfo.style.display = 'block';
         profileAnimated.style.display = 'block';
         inputContainer.style.display = 'none';
@@ -255,6 +258,19 @@ function handleSubmit() {
         }
     } else {
         showMessage('initial');
+        // Clear localStorage when input is empty
+        localStorage.removeItem('lastHandle');
+    }
+}
+
+function loadLastHandle() {
+    const lastHandle = localStorage.getItem('lastHandle');
+    if (lastHandle) {
+        const handleInput = document.getElementById('handle-input');
+        handleInput.value = lastHandle;
+        setTimeout(() => {
+        handleSubmit();
+        }, 1100);
     }
 }
 
@@ -294,7 +310,7 @@ function animateLogo() {
     setTimeout(() => {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
-    }, 500);
+    }, 600);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -314,14 +330,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (handleInput.value.trim() === '') {
             showMessage('initial');
             submitButton.classList.add('forbidden');
+            // Clear localStorage when input is cleared
+            localStorage.removeItem('lastHandle');
         } else {
             submitButton.classList.remove('forbidden');
             showMessage('none');
-            handleInput.addEventListener('keypress', (event) => {
-                if (event.key === 'Enter') {
-                    handleSubmit();
-                }
-            });
+        }
+    });
+
+    handleInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
         }
     });
 
@@ -330,4 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
             backtoinput();
         }
     });
+
+    // Load the last handle when the app starts
+    loadLastHandle();
 });
