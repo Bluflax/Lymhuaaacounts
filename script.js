@@ -278,12 +278,12 @@ function loadLastHandle() {
         launchdelay.delay = 1100;
         profile.style.opacity = '0.5';
         profile.style.pointerEvents = 'none';
-        submitButton.classList.remove('forbidden');
         showMessage('none');
         setTimeout(() => {
             handleSubmit();
             profile.style.opacity = '1';
             profile.style.pointerEvents = 'auto';
+            submitButton.classList.remove('forbidden');
         }, 1600);
     }
 }

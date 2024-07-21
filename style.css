@@ -4,8 +4,8 @@
     --text-forbidden-color: #999;
     --secondary-text-color: #657786;
     --bordernotused-color: #e1e8eda0;
-    --border-color: #edededa0;
-    --border-firm-color: #edededd4;
+    --border-color: #edededcb;
+    --border-firm-color: #ededed;
     --link-color: #1da1f2;
     --button-color: #1da1f2;
     --button-forbidden-color: #b0b0b0;
@@ -21,8 +21,8 @@
         --text-forbidden-color: #808080;
         --secondary-text-color: #8899a6;
         --bordernotused-color: #38444da0;
-        --border-color: #4d4d4da0;
-        --border-firm-color: #4d4d4dd4;
+        --border-color: #4d4d4dcb;
+        --border-firm-color: #4d4d4d;
         --link-color: #1da1f2;
         --button-color: #1da1f2;
         --button-forbidden-color: #666;
