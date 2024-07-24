@@ -10,6 +10,7 @@
     --button-color: #1da1f2;
     --button-forbidden-color: #b0b0b0;
     --button-text-color: #ffffff;
+    --event-color: #d7e8ff;
     --default-color: #d1d9dd;
 }
 
@@ -27,6 +28,7 @@
         --button-color: #1da1f2;
         --button-forbidden-color: #666;
         --button-text-color: #ffffff;
+        --event-color: #141b24;
         --default-color: #343639;
     }
 }
@@ -328,11 +330,27 @@ main {
 }
 
 .event {
-    background-color: #4d96ff;
-    color: var(--bg-color);
-    border-radius: 8px;
+    background-color: var(--event-color);
+    color: var(--text-color);
     padding: 15px;
-    margin: 10px 0;
+}
+
+.event video {
+    width: 300px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.event .title {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.event .subtitle {
+    font-size: 0.5em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0.8;
 }
 
 .tweet {

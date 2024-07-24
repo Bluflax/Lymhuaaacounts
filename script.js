@@ -58,6 +58,7 @@ async function fetchContent() {
                     username: handlePart[1].split('=')[1],
                     status: handlePart[2].split('=')[1],
                     joinDate: handlePart[3].split('=')[1],
+                    userEventData: handlePart[4].split('=')[1],
                     info: {},
                     tweets: []
                 };
@@ -93,13 +94,15 @@ function showMessage(messageType) {
     const hiddenAccountMessage = document.getElementById('hidden-account-message');
     const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
     const contentContainer = document.getElementById('content-container');
+    const userEvent = document.getElementById('user-event');
 
     Message.style.display = 'flex';
     hiddenAccountMessage.style.display = 'none';
     unsupportedAccountMessage.style.display = 'none';
     contentContainer.style.display = 'none';
+    userEvent.style.display = 'none';
     document.getElementById('initial-state-title').style.display = 'none';
-            document.getElementById('initial-state-description').style.display = 'none';
+    document.getElementById('initial-state-description').style.display = 'none';
 
     switch (messageType) {
         case 'initial':
@@ -111,6 +114,11 @@ function showMessage(messageType) {
             break;
         case 'unsupported':
             unsupportedAccountMessage.style.display = 'block';
+            break;
+        case 'event':
+            Message.style.display = 'none';
+            contentContainer.style.display = 'block';
+            userEvent.style.display = 'block';
             break;
         case 'none':
             Message.style.display = 'none';
@@ -158,6 +166,7 @@ function displayProfile(handle) {
             detail1.textContent = '📆 Joined ' + userData.joinDate || '';
             detail2.textContent = ''; // Sample followers count
         }
+
     } else {
         // Treat unmatched accounts as hidden
         profileName.textContent = `@${handle}`;
@@ -183,6 +192,10 @@ function displayContent(handle) {
         if (userData.status === 'hidden' || userData.status === 'notsupported') {
             contentContainer.style.display = 'none';
             return;
+        }
+
+        if (userData.userEventData === 'yes') {
+            showMessage('event');
         }
         
         userData.tweets.forEach(tweet => {
