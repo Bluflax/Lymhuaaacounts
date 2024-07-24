@@ -4,7 +4,7 @@
     --text-forbidden-color: #999;
     --secondary-text-color: #657786;
     --bordernotused-color: #e1e8eda0;
-    --border-color: #dadadacb;
+    --border-color: #dadada90;
     --border-firm-color: #dadada;
     --link-color: #1da1f2;
     --button-color: #1da1f2;
@@ -23,7 +23,7 @@
         --text-forbidden-color: #808080;
         --secondary-text-color: #8899a6;
         --bordernotused-color: #38444da0;
-        --border-color: #4d4d4dcb;
+        --border-color: #4d4d4d90;
         --border-firm-color: #4d4d4d;
         --link-color: #1da1f2;
         --button-color: #1da1f2;
@@ -336,6 +336,7 @@ main {
     background-color: var(--event-color);
     color: var(--text-color);
     padding: 15px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .event video {
@@ -353,7 +354,8 @@ main {
     font-size: 0.5em;
     letter-spacing: 1px;
     margin-bottom: 10px;
-    mix-blend-mode: overlay;
+    color: var(--text-color);
+    opacity: 0.5;
 }
 
 .event .description {
