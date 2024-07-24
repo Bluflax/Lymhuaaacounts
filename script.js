@@ -186,21 +186,27 @@ function displayContent(handle) {
         }
         
         userData.tweets.forEach(tweet => {
-            const contentDiv = document.createElement('div');
-            contentDiv.className = tweet.contentType; // Use contentType directly for class name
+            const tweetDiv = document.createElement('div');
+            tweetDiv.className = `tweet ${tweet.contentType}`;
             
-            const contentElement = document.createElement('p');
-            contentElement.className = 'content-text';
-            contentElement.textContent = tweet.message;
+            const tweetContent = document.createElement('p');
+            tweetContent.className = 'tweet-content';
+            tweetContent.textContent = tweet.message;
             
-            contentDiv.appendChild(contentElement);
+            tweetDiv.appendChild(tweetContent);
             
-            // Apply color style if it's not default
-            if (tweet.colorStyle !== 'default') {
-                contentDiv.classList.add(tweet.colorStyle);
+            // Apply color style
+            if (tweet.colorStyle.endsWith('-gradient')) {
+                const baseColor = getBaseColor(tweet.colorStyle);
+                const gradient = createGradient(baseColor);
+                tweetDiv.classList.add('gradient');
+                tweetDiv.style.setProperty('--color-light', gradient.light);
+                tweetDiv.style.setProperty('--color-dark', gradient.dark);
+            } else {
+                tweetDiv.classList.add(tweet.colorStyle);
             }
             
-            contentContainer.appendChild(contentDiv);
+            contentContainer.appendChild(tweetDiv);
         });
     } else {
         // For unmatched accounts, don't display any content
