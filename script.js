@@ -291,7 +291,7 @@ function loadLastHandle() {
             profile.style.opacity = '1';
             profile.style.pointerEvents = 'auto';
             submitButton.classList.remove('forbidden');
-        }, 2000);
+        }, 1600);
     }
 }
 
