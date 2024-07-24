@@ -269,7 +269,7 @@ function loadLastHandle() {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
         handleInput.blur();
-        launchdelay.delay = 1100;
+        launchdelay.delay = 1600;
         profile.style.opacity = '0.5';
         profile.style.pointerEvents = 'none';
         showMessage('none');
@@ -278,7 +278,7 @@ function loadLastHandle() {
             profile.style.opacity = '1';
             profile.style.pointerEvents = 'auto';
             submitButton.classList.remove('forbidden');
-        }, 1600);
+        }, 2000);
     }
 }
 
