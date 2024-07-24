@@ -311,18 +311,36 @@ main {
 }
 
 
-.tweet {
+.block {
     border-bottom: 1px solid var(--border-color);
     border-radius: 0px;
     padding: 15px;
     overflow: hidden;
 }
 
-.tweet-content {
-    font-size: 14px;
-    line-height: 1.5;
+.alert {
+    background-color: #ff9ff3;
+    color: var(--bg-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    font-weight: bold;
 }
 
+.event {
+    background-color: #4d96ff;
+    color: var(--bg-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.tweet {
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0px;
+    padding: 15px;
+    overflow: hidden;
+}
 
 
 /* 自定义颜色类 */
@@ -333,12 +351,6 @@ main {
 .purple { background-color: #9c88ff; }
 .orange { background-color: #ff9ff3; }
 
-/* 渐变背景 */
-.gradient {
-    color: var(--bg-color); /* 确保文字在深色背景上可见 */
-    background: linear-gradient(to bottom right, var(--color-light), var(--color-dark));
-    padding: 15px;
-}
 
 
 .logo-overlay {
