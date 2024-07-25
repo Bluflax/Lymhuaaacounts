@@ -27,27 +27,29 @@
                     <div class="text">@</div>
                     <input type="text" id="handle-input" placeholder="UserID" onkeypress="return event.charCode != 32" autocomplete="off">
                 </div>
-                <div id="submit-handle" class="profilebutton submit-button forbidden">Confirm</div>
+                <div id="submit-handle" class="profilebutton submit-button forbidden" style="display: none;">→</div>
             </div>
 
-            <div id="profile-info" class="profile-info">
-                <div id="change-handle" class="profilebutton change-button">Edit</div>
-                <h1 id="profile-name" onclick="backtoinput()"></h1>
-                <p id="profile-handle"></p>
-            </div>
-            <div class="profileanimated" id="profileanimated">
-                <div class="profile-detail animated" id="profile-detail">
-                    <p id="profile-bio-info" class="bio biotransition"></p>
+            <div class="profile noneborder" id="profile">
+                <div id="profile-info" class="profile-info">
+                    <div id="change-handle" class="profilebutton change-button" style="display: none;">✕</div>
+                    <h1 id="profile-name" onclick="backtoinput()"></h1>
+                    <p id="profile-handle"></p>
                 </div>
-                <div class="profilefixed animated" id="profilefixed">
-                    <div class="profile-stats">
-                        <span id="profile-detail1"></span>
-                        <span id="profile-detail2"></span>
+                <div class="profileanimated" id="profileanimated">
+                    <div class="profile-detail animated" id="profile-detail">
+                        <p id="profile-bio-info" class="bio biotransition"></p>
                     </div>
-                    <div class="classindicator">
-                        <div id="class-content" class="class selected">内容</div>
-                        <div id="class-config" class="class">设置</div>
-                        <div class="class-decept"></div>
+                    <div class="profilefixed animated" id="profilefixed">
+                        <div class="profile-stats">
+                            <span id="profile-detail1"></span>
+                            <span id="profile-detail2"></span>
+                        </div>
+                        <div class="classindicator">
+                            <div id="class-content" class="class selected">内容</div>
+                            <div id="class-config" class="class">设置</div>
+                            <div class="class-decept"></div>
+                        </div>
                     </div>
                 </div>
             </div>

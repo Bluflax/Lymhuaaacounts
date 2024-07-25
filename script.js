@@ -226,6 +226,7 @@ function handleSubmit() {
     const handleInput = document.getElementById('handle-input');
     const handle = handleInput.value.trim();
     const profileInfo = document.getElementById('profile-info');
+    const profile = document.getElementById('profile');
     const profileDetail = document.getElementById('profile-detail');
     const profileAnimated = document.getElementById('profileanimated');
     const profileFixed = document.getElementById('profilefixed');
@@ -244,11 +245,10 @@ function handleSubmit() {
         void profileDetail.offsetWidth;
         void profileFixed.offsetWidth;
         
-        profileDetail.classList.remove('animated');
         displayProfile(handle);
         displaycontentTimeout = setTimeout(() => {
             displayContent(handle);
-        }, 300);
+        }, 1);
         
         // Convert handle to lowercase for case-insensitive matching
         const lowerHandle = handle.toLowerCase();
@@ -257,11 +257,17 @@ function handleSubmit() {
         // Check if the account is normal and show/hide classindicator accordingly
         if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
             profileFixed.style.display = 'flex';
+            profile.classList.add('animated');
+            profile.classList.remove('noneborder');
+            setTimeout(() => {
+                profile.classList.remove('animated');
+                
+            }, 1);
             // Force a reflow before removing the 'animated' class
             void profileFixed.offsetWidth;
-            profileFixed.classList.remove('animated');
         } else {
             profileFixed.style.display = 'none';
+            profile.classList.remove('animated');
         }
     } else {
         showMessage('initial');
@@ -282,7 +288,7 @@ function loadLastHandle() {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
         handleInput.blur();
-        launchdelay.delay = 1600;
+        launchdelay.delay = 1800;
         profile.style.opacity = '0.5';
         profile.style.pointerEvents = 'none';
         showMessage('none');
@@ -291,12 +297,13 @@ function loadLastHandle() {
             profile.style.opacity = '1';
             profile.style.pointerEvents = 'auto';
             submitButton.classList.remove('forbidden');
-        }, 1600);
+        }, 1800);
     }
 }
 
 
 function backtoinput() {
+    const profile = document.getElementById('profile');
     const profileInfo = document.getElementById('profile-info');
     const profileDetail = document.getElementById('profile-detail');
     const profileAnimated = document.getElementById('profileanimated');
@@ -318,9 +325,8 @@ function backtoinput() {
     void profileDetail.offsetWidth;
     void classIndicator.offsetWidth;
     
-    profileDetail.classList.add('animated');
     profileFixed.style.display = 'none';
-    profileFixed.classList.add('animated');
+    profile.classList.add('noneborder');
     showMessage('none');
     handleInput.focus();
 }
