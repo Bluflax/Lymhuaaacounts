@@ -58,6 +58,7 @@ async function fetchContent() {
                     username: handlePart[1].split('=')[1],
                     status: handlePart[2].split('=')[1],
                     joinDate: handlePart[3].split('=')[1],
+                    userEventData: handlePart[4].split('=')[1],
                     info: {},
                     tweets: []
                 };
@@ -93,13 +94,15 @@ function showMessage(messageType) {
     const hiddenAccountMessage = document.getElementById('hidden-account-message');
     const unsupportedAccountMessage = document.getElementById('unsupported-account-message');
     const contentContainer = document.getElementById('content-container');
+    const userEvent = document.getElementById('user-event');
 
     Message.style.display = 'flex';
     hiddenAccountMessage.style.display = 'none';
     unsupportedAccountMessage.style.display = 'none';
     contentContainer.style.display = 'none';
+    userEvent.style.display = 'none';
     document.getElementById('initial-state-title').style.display = 'none';
-            document.getElementById('initial-state-description').style.display = 'none';
+    document.getElementById('initial-state-description').style.display = 'none';
 
     switch (messageType) {
         case 'initial':
@@ -111,6 +114,11 @@ function showMessage(messageType) {
             break;
         case 'unsupported':
             unsupportedAccountMessage.style.display = 'block';
+            break;
+        case 'event':
+            Message.style.display = 'none';
+            contentContainer.style.display = 'block';
+            userEvent.style.display = 'block';
             break;
         case 'none':
             Message.style.display = 'none';
@@ -158,6 +166,7 @@ function displayProfile(handle) {
             detail1.textContent = '📆 Joined ' + userData.joinDate || '';
             detail2.textContent = ''; // Sample followers count
         }
+
     } else {
         // Treat unmatched accounts as hidden
         profileName.textContent = `@${handle}`;
@@ -184,29 +193,27 @@ function displayContent(handle) {
             contentContainer.style.display = 'none';
             return;
         }
+
+        if (userData.userEventData === 'yes') {
+            showMessage('event');
+        }
         
         userData.tweets.forEach(tweet => {
-            const tweetDiv = document.createElement('div');
-            tweetDiv.className = `tweet ${tweet.contentType}`;
+            const contentDiv = document.createElement('div');
+            contentDiv.className = tweet.contentType; // Use contentType directly for class name
             
-            const tweetContent = document.createElement('p');
-            tweetContent.className = 'tweet-content';
-            tweetContent.textContent = tweet.message;
+            const contentElement = document.createElement('p');
+            contentElement.className = 'content-text';
+            contentElement.textContent = tweet.message;
             
-            tweetDiv.appendChild(tweetContent);
+            contentDiv.appendChild(contentElement);
             
-            // Apply color style
-            if (tweet.colorStyle.endsWith('-gradient')) {
-                const baseColor = getBaseColor(tweet.colorStyle);
-                const gradient = createGradient(baseColor);
-                tweetDiv.classList.add('gradient');
-                tweetDiv.style.setProperty('--color-light', gradient.light);
-                tweetDiv.style.setProperty('--color-dark', gradient.dark);
-            } else {
-                tweetDiv.classList.add(tweet.colorStyle);
+            // Apply color style if it's not default
+            if (tweet.colorStyle !== 'default') {
+                contentDiv.classList.add(tweet.colorStyle);
             }
             
-            contentContainer.appendChild(tweetDiv);
+            contentContainer.appendChild(contentDiv);
         });
     } else {
         // For unmatched accounts, don't display any content
@@ -219,6 +226,7 @@ function handleSubmit() {
     const handleInput = document.getElementById('handle-input');
     const handle = handleInput.value.trim();
     const profileInfo = document.getElementById('profile-info');
+    const profile = document.getElementById('profile');
     const profileDetail = document.getElementById('profile-detail');
     const profileAnimated = document.getElementById('profileanimated');
     const profileFixed = document.getElementById('profilefixed');
@@ -237,11 +245,10 @@ function handleSubmit() {
         void profileDetail.offsetWidth;
         void profileFixed.offsetWidth;
         
-        profileDetail.classList.remove('animated');
         displayProfile(handle);
         displaycontentTimeout = setTimeout(() => {
             displayContent(handle);
-        }, 300);
+        }, 1);
         
         // Convert handle to lowercase for case-insensitive matching
         const lowerHandle = handle.toLowerCase();
@@ -250,11 +257,17 @@ function handleSubmit() {
         // Check if the account is normal and show/hide classindicator accordingly
         if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
             profileFixed.style.display = 'flex';
+            profile.classList.add('animated');
+            profile.classList.remove('noneborder');
+            setTimeout(() => {
+                profile.classList.remove('animated');
+                
+            }, 1);
             // Force a reflow before removing the 'animated' class
             void profileFixed.offsetWidth;
-            profileFixed.classList.remove('animated');
         } else {
             profileFixed.style.display = 'none';
+            profile.classList.remove('animated');
         }
     } else {
         showMessage('initial');
@@ -263,19 +276,34 @@ function handleSubmit() {
     }
 }
 
+const launchdelay = {
+    delay: 400
+};
+
 function loadLastHandle() {
     const lastHandle = localStorage.getItem('lastHandle');
+    const profile = document.getElementById('profile-container');
+    const submitButton = document.getElementById('submit-handle');
     if (lastHandle) {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
+        handleInput.blur();
+        launchdelay.delay = 1800;
+        profile.style.opacity = '0.5';
+        profile.style.pointerEvents = 'none';
+        showMessage('none');
         setTimeout(() => {
-        handleSubmit();
-        }, 1100);
+            handleSubmit();
+            profile.style.opacity = '1';
+            profile.style.pointerEvents = 'auto';
+            submitButton.classList.remove('forbidden');
+        }, 1800);
     }
 }
 
 
 function backtoinput() {
+    const profile = document.getElementById('profile');
     const profileInfo = document.getElementById('profile-info');
     const profileDetail = document.getElementById('profile-detail');
     const profileAnimated = document.getElementById('profileanimated');
@@ -297,9 +325,8 @@ function backtoinput() {
     void profileDetail.offsetWidth;
     void classIndicator.offsetWidth;
     
-    profileDetail.classList.add('animated');
     profileFixed.style.display = 'none';
-    profileFixed.classList.add('animated');
+    profile.classList.add('noneborder');
     showMessage('none');
     handleInput.focus();
 }
@@ -310,13 +337,11 @@ function animateLogo() {
     setTimeout(() => {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
-    }, 600);
+    }, launchdelay.delay);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchContent();
-    animateLogo();
-    showMessage('initial');
     
     const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
@@ -330,7 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (handleInput.value.trim() === '') {
             showMessage('initial');
             submitButton.classList.add('forbidden');
-            // Clear localStorage when input is cleared
             localStorage.removeItem('lastHandle');
         } else {
             submitButton.classList.remove('forbidden');
@@ -349,7 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
             backtoinput();
         }
     });
-
-    // Load the last handle when the app starts
+    
+    showMessage('initial');
     loadLastHandle();
+    animateLogo();
+    
 });
