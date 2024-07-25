@@ -182,7 +182,16 @@ function displayContent(handle) {
     contentContainer.innerHTML = '';
     contentContainer.style.display = 'block';
     
-    // Convert handle to lowercase for case-insensitive matching
+    // 移除 visible 类，重置透明度
+    contentContainer.classList.remove('visible');
+    
+    // 强制重排
+    void contentContainer.offsetWidth;
+    
+    // 添加 visible 类来触发过渡效果
+    contentContainer.classList.add('visible');
+    
+    // 转换 handle 为小写以进行不区分大小写的匹配
     const lowerHandle = handle.toLowerCase();
     const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
     
@@ -200,7 +209,7 @@ function displayContent(handle) {
         
         userData.tweets.forEach(tweet => {
             const contentDiv = document.createElement('div');
-            contentDiv.className = tweet.contentType; // Use contentType directly for class name
+            contentDiv.className = tweet.contentType;
             
             const contentElement = document.createElement('p');
             contentElement.className = 'content-text';
@@ -208,7 +217,6 @@ function displayContent(handle) {
             
             contentDiv.appendChild(contentElement);
             
-            // Apply color style if it's not default
             if (tweet.colorStyle !== 'default') {
                 contentDiv.classList.add(tweet.colorStyle);
             }
@@ -216,7 +224,6 @@ function displayContent(handle) {
             contentContainer.appendChild(contentDiv);
         });
     } else {
-        // For unmatched accounts, don't display any content
         contentContainer.style.display = 'none';
     }
 }
@@ -314,6 +321,8 @@ function backtoinput() {
     const classIndicator = document.querySelector('.classindicator');
 
     fetchContent();
+
+    contentContainer.classList.remove('visible');
 
     clearTimeout(displaycontentTimeout);
     profileInfo.style.display = 'none';
