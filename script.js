@@ -89,6 +89,12 @@ async function fetchContent() {
     }
 }
 
+function getIdFromUrl() {
+    const path = window.location.pathname;
+    const segments = path.split('/');
+    return segments[segments.length - 1] || '';
+}
+
 function showMessage(messageType) {
     const Message = document.getElementById('display-message');
     const hiddenAccountMessage = document.getElementById('hidden-account-message');
@@ -288,7 +294,8 @@ const launchdelay = {
 };
 
 function loadLastHandle() {
-    const lastHandle = localStorage.getItem('lastHandle');
+    const urlId = getIdFromUrl();
+    const lastHandle = urlId || localStorage.getItem('lastHandle');
     const profile = document.getElementById('profile-container');
     const submitButton = document.getElementById('submit-handle');
     if (lastHandle) {
@@ -382,9 +389,18 @@ document.addEventListener('DOMContentLoaded', () => {
             backtoinput();
         }
     });
+
+    
     
     showMessage('initial');
     loadLastHandle();
     animateLogo();
+
+    const urlId = getIdFromUrl();
+    if (urlId) {
+        const handleInput = document.getElementById('handle-input');
+        handleInput.value = urlId;
+        handleSubmit();
+    }
     
 });
