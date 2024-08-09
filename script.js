@@ -85,7 +85,6 @@ async function fetchContent() {
         });
     } catch (error) {
         console.error('Error fetching content:', error);
-        showMessage('hidden');
         document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
     }
 }
@@ -348,8 +347,8 @@ function animateLogo() {
     }, 400);
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    await fetchContent();
+document.addEventListener('DOMContentLoaded', () => {
+    fetchContent();
     
     const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
@@ -385,4 +384,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     showMessage('initial');
     loadLastHandle();
     animateLogo();
+    
 });
