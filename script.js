@@ -345,7 +345,7 @@ function animateLogo() {
     setTimeout(() => {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
-    }, 400);
+    }, 0);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
