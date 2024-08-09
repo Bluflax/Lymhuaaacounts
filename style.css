@@ -346,13 +346,7 @@ main {
 }
 
 
-.block {
-    border-bottom: 1px solid var(--border-color);
-    border-radius: 0px;
-    padding: 15px;
-    font-size: 14px;
-    overflow: hidden;
-}
+
 
 
 .event {
@@ -413,15 +407,24 @@ main {
     transform: translateX(-3px);
 }
 
-.tweet {
+.block {
     border-bottom: 1px solid var(--border-color);
     border-radius: 0px;
     padding: 15px;
+    font-size: 14px;
     overflow: hidden;
 }
 
-.content-container .event {
+.block p {
+    margin: 0;
+}
 
+.nml .subtitle {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    opacity: 0.5;
 }
 
 

@@ -222,10 +222,15 @@ function displayContent(handle) {
             const contentDiv = document.createElement('div');
             contentDiv.className = tweet.contentType;
             
+            const contentSubtitle = document.createElement('div');
+            contentSubtitle.className = 'subtitle';
+            contentSubtitle.textContent = 'MESSAGE';
+            
             const contentElement = document.createElement('p');
             contentElement.className = 'content-text';
             contentElement.textContent = tweet.message;
             
+            contentDiv.appendChild(contentSubtitle);
             contentDiv.appendChild(contentElement);
             
             if (tweet.colorStyle !== '') {
