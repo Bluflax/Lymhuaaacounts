@@ -30,64 +30,73 @@ let contentData = null;
 async function fetchContent() {
     const url = 'https://app.simplenote.com/publish/HGCwdm';
     const proxyUrl = 'https://api.allorigins.win/get?url=';
-    
-    try {
-        const response = await fetch(proxyUrl + encodeURIComponent(url), {
-            method: 'GET',
-            cache: 'no-store'
-        });
-        const data = await response.json();
-        const htmlString = data.contents;
+
+    let retryCount = 0;
+    while (retryCount < 20) {
         
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        
-        contentData = {};
-        const paragraphs = doc.querySelectorAll('.note-detail-markdown p');
-        
-        paragraphs.forEach((p, index) => {
-            if (index === 0) return;
+        try {
+            const response = await fetch(proxyUrl + encodeURIComponent(url), {
+                method: 'GET',
+                cache: 'no-store'
+            });
+            const data = await response.json();
+            const htmlString = data.contents;
             
-            const text = p.textContent.trim();
-            if (text.startsWith('@handle=')) {
-                const parts = text.split('::').map(part => part.trim());
-                const handlePart = parts[0].split('\n');
-                const handle = handlePart[0].split('=')[1];
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            
+            contentData = {};
+            const paragraphs = doc.querySelectorAll('.note-detail-markdown p');
+            
+            paragraphs.forEach((p, index) => {
+                if (index === 0) return;
                 
-                contentData[handle] = {
-                    username: handlePart[1].split('=')[1],
-                    status: handlePart[2].split('=')[1],
-                    joinDate: handlePart[3].split('=')[1],
-                    userEventData: handlePart[4].split('=')[1],
-                    info: {},
-                    tweets: []
-                };
-                
-                // Parse user info
-                const infoPart = parts[0].split(':')[1].trim();
-                const infoItems = infoPart.match(/(\w+)\(([^)]+)\)/g);
-                if (infoItems) {
-                    infoItems.forEach(item => {
-                        const [, key, value] = item.match(/(\w+)\(([^)]+)\)/);
-                        contentData[handle].info[key] = value;
-                    });
-                }
-                
-                // Parse tweets
-                for (let i = 1; i < parts.length - 1; i++) {
-                    const contentParts = parts[i].match(/(.+),\s*(.+)\s*\((.+)\)/);
-                    if (contentParts) {
-                        const [, contentType, colorStyle, message] = contentParts;
-                        contentData[handle].tweets.push({ contentType, colorStyle, message });
+                const text = p.textContent.trim();
+                if (text.startsWith('@handle=')) {
+                    const parts = text.split('::').map(part => part.trim());
+                    const handlePart = parts[0].split('\n');
+                    const handle = handlePart[0].split('=')[1];
+                    
+                    contentData[handle] = {
+                        username: handlePart[1].split('=')[1],
+                        status: handlePart[2].split('=')[1],
+                        joinDate: handlePart[3].split('=')[1],
+                        userEventData: handlePart[4].split('=')[1],
+                        info: {},
+                        tweets: []
+                    };
+                    
+                    // Parse user info
+                    const infoPart = parts[0].split(':')[1].trim();
+                    const infoItems = infoPart.match(/(\w+)\(([^)]+)\)/g);
+                    if (infoItems) {
+                        infoItems.forEach(item => {
+                            const [, key, value] = item.match(/(\w+)\(([^)]+)\)/);
+                            contentData[handle].info[key] = value;
+                        });
+                    }
+                    
+                    // Parse tweets
+                    for (let i = 1; i < parts.length - 1; i++) {
+                        const contentParts = parts[i].match(/(.+),\s*(.+)\s*\((.+)\)/);
+                        if (contentParts) {
+                            const [, contentType, colorStyle, message] = contentParts;
+                            contentData[handle].tweets.push({ contentType, colorStyle, message });
+                        }
                     }
                 }
-            }
-        });
-    } catch (error) {
-        console.error('Error fetching content:', error);
-        showMessage('hidden');
-        document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
+            });
+
+            return;
+        } catch (error) {
+            console.error('Error fetching content:', error);
+            showMessage('hidden');
+            document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
+            retryCount++;
+            await new Promise(resolve => setTimeout(resolve, 400));
+        }
     }
+    throw new Error('Cannot fetch content after 3 retries.');
 }
 
 function showMessage(messageType) {
