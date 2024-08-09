@@ -46,8 +46,6 @@ body {
     background-color: var(--bg-color);
     margin: 0;
     padding: 0;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 main {
@@ -158,6 +156,8 @@ main {
     border: 1.5px solid var(--bg-color);
     border-bottom: 1.5px solid var(--border-color);
     background-color: var(--bg-color);
+    -webkit-user-select: none;
+    user-select: none;
     transition: background-color 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), border 1s ease-out;
 }
 
