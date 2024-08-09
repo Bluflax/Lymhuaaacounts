@@ -157,10 +157,10 @@ function displayProfile(handle) {
         if (userData.status === 'hidden') {
             profileName.textContent = `@${handle}`;
             showMessage('hidden');
-        } else if (userData.status === 'notsupported') {
-            profileName.textContent = `@${handle}`;
-            showMessage('unsupported');
         } else {
+            if (userData.status === 'notsupported') {
+                showMessage('unsupported');
+            }
             profileName.textContent = userData.username;
             profileBioInfo.textContent = userData.info.bio || '';
             detail1.textContent = '📆 Joined ' + userData.joinDate || '';
@@ -198,7 +198,8 @@ function displayContent(handle) {
     if (matchedHandle) {
         const userData = contentData[matchedHandle];
         
-        if (userData.status === 'hidden' || userData.status === 'notsupported') {
+        //if (userData.status === 'hidden' || userData.status === 'notsupported') {
+        if (userData.status === 'hidden') {
             contentContainer.style.display = 'none';
             return;
         }
@@ -246,7 +247,7 @@ function handleSubmit() {
         profileInfo.style.display = 'block';
         profileAnimated.style.display = 'block';
         inputContainer.style.display = 'none';
-        showMessage('none'); // Hide all messages
+        //showMessage('none'); // Hide all messages
         
         // Force a reflow before removing the 'animated' class
         void profileDetail.offsetWidth;
@@ -262,7 +263,8 @@ function handleSubmit() {
         const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
         
         // Check if the account is normal and show/hide classindicator accordingly
-        if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
+        //if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
+        if (matchedHandle && contentData[matchedHandle].status !== 'hidden') {
             profileFixed.style.display = 'flex';
             profile.classList.add('animated');
             profile.classList.remove('noneborder');
