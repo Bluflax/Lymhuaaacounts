@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-startup-image" href="assets/webapp/launch-screen.png">
     <link rel="icon" type="image/png" href="assets/webapp/faviconfull.png">
@@ -13,7 +14,7 @@
 </head>
 <body>
     <div class="logo-overlay" id="logo-overlay">
-        <img src="assets/webapp/icon-512-new.png" alt="Logo" id="logo">
+        <img src="assets/pic/in-app-launch.PNG" alt="Logo" id="logo">
     </div>
     <main role="main" id="main">
         <div id="profile-container" style="display: block;">
@@ -60,19 +61,17 @@
             <div class="display-message-title" id="hidden-account-message" style="display: none;">
                 Cannot find your account.
             </div>
-            <div class="display-message-title" id="unsupported-account-message" style="display: none;">
-                Not supported
+            <div class="event alert" id="unsupported-account-message" style="display: none;">
+                <div class="subtitle">CRITICAL</div>
+                <div class="title">新版的(LYMH)软件不再支持你的账户。</div>
+                <div class="description">蓝亚麻花将升级到18软件版本。自2024年9月6日起，新的软件不会继续为你提供支持。</div>
             </div>
         </div>
         
         <div class="event" id="user-event" style="display: none;">
-            <div class="eventcompo subtitle">EVENT</div>
-            <video controls preload="metadata" id="event-video">
-                <source src="HORNY.mp4" type="video/mp4">
-            </video>
-            <div class="eventcompo title">Horny</div>
-            <div class="eventcompo description">它很烦恼，因为"它的角对着它朋友狂长"。</div>
-            <div class="squarebutton" id="event-button" onclick="window.open('https://www.youtube.com/watch?v=mz4DkiWF7FE')">去 Youtube 查看原视频</div>
+            <div class="eventcompo subtitle">PREVIEW</div>
+            <div class="eventcompo title">欢迎使用预览版(LYMH)账户!</div>
+            <div class="eventcompo description">预览版的行为逻辑可能随时更改或取消。</div>
         </div>
 
         <div id="content-container" style="display: none;"></div>

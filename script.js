@@ -30,63 +30,73 @@ let contentData = null;
 async function fetchContent() {
     const url = 'https://app.simplenote.com/publish/HGCwdm';
     const proxyUrl = 'https://api.allorigins.win/get?url=';
-    
-    try {
-        const response = await fetch(proxyUrl + encodeURIComponent(url), {
-            method: 'GET',
-            cache: 'no-store'
-        });
-        const data = await response.json();
-        const htmlString = data.contents;
+
+    let retryCount = 0;
+    while (retryCount < 20) {
         
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        
-        contentData = {};
-        const paragraphs = doc.querySelectorAll('.note-detail-markdown p');
-        
-        paragraphs.forEach((p, index) => {
-            if (index === 0) return;
+        try {
+            const response = await fetch(proxyUrl + encodeURIComponent(url), {
+                method: 'GET',
+                cache: 'no-store'
+            });
+            const data = await response.json();
+            const htmlString = data.contents;
             
-            const text = p.textContent.trim();
-            if (text.startsWith('@handle=')) {
-                const parts = text.split('::').map(part => part.trim());
-                const handlePart = parts[0].split('\n');
-                const handle = handlePart[0].split('=')[1];
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            
+            contentData = {};
+            const paragraphs = doc.querySelectorAll('.note-detail-markdown p');
+            
+            paragraphs.forEach((p, index) => {
+                if (index === 0) return;
                 
-                contentData[handle] = {
-                    username: handlePart[1].split('=')[1],
-                    status: handlePart[2].split('=')[1],
-                    joinDate: handlePart[3].split('=')[1],
-                    userEventData: handlePart[4].split('=')[1],
-                    info: {},
-                    tweets: []
-                };
-                
-                // Parse user info
-                const infoPart = parts[0].split(':')[1].trim();
-                const infoItems = infoPart.match(/(\w+)\(([^)]+)\)/g);
-                if (infoItems) {
-                    infoItems.forEach(item => {
-                        const [, key, value] = item.match(/(\w+)\(([^)]+)\)/);
-                        contentData[handle].info[key] = value;
-                    });
-                }
-                
-                // Parse tweets
-                for (let i = 1; i < parts.length - 1; i++) {
-                    const contentParts = parts[i].match(/(.+),\s*(.+)\s*\((.+)\)/);
-                    if (contentParts) {
-                        const [, contentType, colorStyle, message] = contentParts;
-                        contentData[handle].tweets.push({ contentType, colorStyle, message });
+                const text = p.textContent.trim();
+                if (text.startsWith('@handle=')) {
+                    const parts = text.split('::').map(part => part.trim());
+                    const handlePart = parts[0].split('\n');
+                    const handle = handlePart[0].split('=')[1];
+                    
+                    contentData[handle] = {
+                        username: handlePart[1].split('=')[1],
+                        status: handlePart[2].split('=')[1],
+                        joinDate: handlePart[3].split('=')[1],
+                        userEventData: handlePart[4].split('=')[1],
+                        info: {},
+                        tweets: []
+                    };
+                    
+                    // Parse user info
+                    const infoPart = parts[0].split(':')[1].trim();
+                    const infoItems = infoPart.match(/(\w+)\(([^)]+)\)/g);
+                    if (infoItems) {
+                        infoItems.forEach(item => {
+                            const [, key, value] = item.match(/(\w+)\(([^)]+)\)/);
+                            contentData[handle].info[key] = value;
+                        });
+                    }
+                    
+                    // Parse tweets
+                    for (let i = 1; i < parts.length - 1; i++) {
+                        const contentParts = parts[i].match(/(.+),\s*(.+)\s*\((.+)\)/);
+                        if (contentParts) {
+                            const [, contentType, colorStyle, message] = contentParts;
+                            contentData[handle].tweets.push({ contentType, colorStyle, message });
+                        }
                     }
                 }
-            }
-        });
-    } catch (error) {
-        console.error('Error fetching content:', error);
-        document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
+            });
+
+            return;
+        } catch (error) {
+            console.error('Error fetching content:', error);
+            showMessage('hidden');
+            document.getElementById('hidden-account-message').textContent = 'Cannot load user data at the moment.';
+            retryCount++;
+            await new Promise(resolve => setTimeout(resolve, 400));
+        }
     }
+    throw new Error('Cannot fetch content after 3 retries.');
 }
 
 function showMessage(messageType) {
@@ -157,10 +167,10 @@ function displayProfile(handle) {
         if (userData.status === 'hidden') {
             profileName.textContent = `@${handle}`;
             showMessage('hidden');
-        } else if (userData.status === 'notsupported') {
-            profileName.textContent = `@${handle}`;
-            showMessage('unsupported');
         } else {
+            if (userData.status === 'notsupported') {
+                showMessage('unsupported');
+            }
             profileName.textContent = userData.username;
             profileBioInfo.textContent = userData.info.bio || '';
             detail1.textContent = '📆 Joined ' + userData.joinDate || '';
@@ -182,14 +192,24 @@ function displayContent(handle) {
     contentContainer.innerHTML = '';
     contentContainer.style.display = 'block';
     
-    // Convert handle to lowercase for case-insensitive matching
+    // 移除 visible 类，重置透明度
+    contentContainer.classList.remove('visible');
+    
+    // 强制重排
+    void contentContainer.offsetWidth;
+    
+    // 添加 visible 类来触发过渡效果
+    contentContainer.classList.add('visible');
+    
+    // 转换 handle 为小写以进行不区分大小写的匹配
     const lowerHandle = handle.toLowerCase();
     const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
     
     if (matchedHandle) {
         const userData = contentData[matchedHandle];
         
-        if (userData.status === 'hidden' || userData.status === 'notsupported') {
+        //if (userData.status === 'hidden' || userData.status === 'notsupported') {
+        if (userData.status === 'hidden') {
             contentContainer.style.display = 'none';
             return;
         }
@@ -200,7 +220,7 @@ function displayContent(handle) {
         
         userData.tweets.forEach(tweet => {
             const contentDiv = document.createElement('div');
-            contentDiv.className = tweet.contentType; // Use contentType directly for class name
+            contentDiv.className = tweet.contentType;
             
             const contentElement = document.createElement('p');
             contentElement.className = 'content-text';
@@ -208,7 +228,6 @@ function displayContent(handle) {
             
             contentDiv.appendChild(contentElement);
             
-            // Apply color style if it's not default
             if (tweet.colorStyle !== 'default') {
                 contentDiv.classList.add(tweet.colorStyle);
             }
@@ -216,7 +235,6 @@ function displayContent(handle) {
             contentContainer.appendChild(contentDiv);
         });
     } else {
-        // For unmatched accounts, don't display any content
         contentContainer.style.display = 'none';
     }
 }
@@ -239,7 +257,7 @@ function handleSubmit() {
         profileInfo.style.display = 'block';
         profileAnimated.style.display = 'block';
         inputContainer.style.display = 'none';
-        showMessage('none'); // Hide all messages
+        //showMessage('none'); // Hide all messages
         
         // Force a reflow before removing the 'animated' class
         void profileDetail.offsetWidth;
@@ -255,7 +273,8 @@ function handleSubmit() {
         const matchedHandle = Object.keys(contentData).find(key => key.toLowerCase() === lowerHandle);
         
         // Check if the account is normal and show/hide classindicator accordingly
-        if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
+        //if (matchedHandle && contentData[matchedHandle].status !== 'hidden' && contentData[matchedHandle].status !== 'notsupported') {
+        if (matchedHandle && contentData[matchedHandle].status !== 'hidden') {
             profileFixed.style.display = 'flex';
             profile.classList.add('animated');
             profile.classList.remove('noneborder');
@@ -276,9 +295,6 @@ function handleSubmit() {
     }
 }
 
-const launchdelay = {
-    delay: 400
-};
 
 function loadLastHandle() {
     const lastHandle = localStorage.getItem('lastHandle');
@@ -288,7 +304,6 @@ function loadLastHandle() {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
         handleInput.blur();
-        launchdelay.delay = 1800;
         profile.style.opacity = '0.5';
         profile.style.pointerEvents = 'none';
         showMessage('none');
@@ -297,7 +312,7 @@ function loadLastHandle() {
             profile.style.opacity = '1';
             profile.style.pointerEvents = 'auto';
             submitButton.classList.remove('forbidden');
-        }, 1800);
+        }, 0);
     }
 }
 
@@ -314,6 +329,8 @@ function backtoinput() {
     const classIndicator = document.querySelector('.classindicator');
 
     fetchContent();
+
+    contentContainer.classList.remove('visible');
 
     clearTimeout(displaycontentTimeout);
     profileInfo.style.display = 'none';
@@ -337,11 +354,11 @@ function animateLogo() {
     setTimeout(() => {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
-    }, launchdelay.delay);
+    }, 0);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetchContent();
+document.addEventListener('DOMContentLoaded', async () => {
+    await fetchContent();
     
     const inputContainer = document.getElementById('input-container');
     const submitButton = document.getElementById('submit-handle');
@@ -377,5 +394,4 @@ document.addEventListener('DOMContentLoaded', () => {
     showMessage('initial');
     loadLastHandle();
     animateLogo();
-    
 });
