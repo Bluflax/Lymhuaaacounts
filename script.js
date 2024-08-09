@@ -286,9 +286,6 @@ function handleSubmit() {
     }
 }
 
-const launchdelay = {
-    delay: 400
-};
 
 function loadLastHandle() {
     const lastHandle = localStorage.getItem('lastHandle');
@@ -298,7 +295,6 @@ function loadLastHandle() {
         const handleInput = document.getElementById('handle-input');
         handleInput.value = lastHandle;
         handleInput.blur();
-        launchdelay.delay = 2000;
         profile.style.opacity = '0.5';
         profile.style.pointerEvents = 'none';
         showMessage('none');
@@ -307,7 +303,7 @@ function loadLastHandle() {
             profile.style.opacity = '1';
             profile.style.pointerEvents = 'auto';
             submitButton.classList.remove('forbidden');
-        }, 2000);
+        }, 0);
     }
 }
 
@@ -349,7 +345,7 @@ function animateLogo() {
     setTimeout(() => {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
-    }, launchdelay.delay);
+    }, 400);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
