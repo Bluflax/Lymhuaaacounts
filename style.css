@@ -450,8 +450,7 @@ main {
 #logo {
     width: 100vw;
     max-width: 600px;
-    transform: translateY(-20px);
-    filter: saturate(0.8) brightness(1);
+    transform: translateY(0px);
 }
 
 .logoanimated {
