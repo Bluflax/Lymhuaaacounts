@@ -420,6 +420,10 @@ main {
     overflow: hidden;
 }
 
+.content-container .event {
+
+}
+
 
 /* 自定义颜色类 */
 .green { background-color: #82a556; }
@@ -428,6 +432,9 @@ main {
 .yellow { background-color: #feca57; }
 .purple { background-color: #9c88ff; }
 .orange { background-color: #ff9ff3; }
+.title {
+    font-size: 1.5em;
+}
 
 
 
