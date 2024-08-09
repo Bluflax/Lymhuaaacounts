@@ -447,7 +447,11 @@ main {
     transition: opacity 0.16s ease-out, transform 0.5s cubic-bezier(0, 0.2, 0, 1);
 }
 
-
+#logo {
+    width: 100vw;
+    max-width: 600px;
+    transform: translateY(0px);
+}
 
 .logoanimated {
     opacity: 0;
