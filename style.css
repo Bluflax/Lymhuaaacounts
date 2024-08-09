@@ -448,8 +448,8 @@ main {
 }
 
 #logo {
-    width: 384px;
-    height: 384opx;
+    width: 100%;
+    max-width: 600px;
     transform: translateY(-20px);
     filter: saturate(0.8) brightness(1);
 }
