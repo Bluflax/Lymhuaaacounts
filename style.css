@@ -158,12 +158,14 @@ main {
     border: 1.5px solid var(--bg-color);
     border-bottom: 1.5px solid var(--border-color);
     background-color: var(--bg-color);
-    transition: background-color 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), border 1s ease-out;
+    filter: blur(0px);
+    transition: filter 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), border 1s ease-out;
 }
 
 .profile.animated{
     background-color: var(--border-firm-color);
     border: 1.5px solid var(--border-firm-color);
+    filter: blur(3px);
     transition: none;
 }
 
@@ -338,11 +340,13 @@ main {
     max-width: 600px;
     margin: 0;
     opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    filter: blur(3px);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 #content-container.visible {
     opacity: 1;
+    filter: blur(0px);
 }
 
 

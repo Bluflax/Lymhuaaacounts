@@ -280,7 +280,6 @@ function handleSubmit() {
             profile.classList.remove('noneborder');
             setTimeout(() => {
                 profile.classList.remove('animated');
-                
             }, 1);
             // Force a reflow before removing the 'animated' class
             void profileFixed.offsetWidth;
