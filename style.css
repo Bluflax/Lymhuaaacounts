@@ -5,7 +5,7 @@
     --secondary-text-color: #657786;
     --bordernotused-color: #e1e8eda0;
     --border-color: #dadada60;
-    --border-firm-color: #dadada9a;
+    --border-firm-color: #a3a3a3ba;
     --link-color: #1da1f2;
     --button-color: #1da1f2;
     --button-forbidden-color: #b0b0b0;
@@ -183,25 +183,26 @@ main {
 
 .profile-header {
     position: relative;
-    height: 100px;
+    height: 125px;
 }
 
 .profile-banner {
     width: 100%;
     height: 100%;
-    background-color: var(--default-color);
+    background: linear-gradient(180deg, var(--border-color) 0%, var(--bg-color) 100%);
 }
 
 .profile-avatar {
     z-index: 2;
     position: absolute;
     bottom: -45px;
-    left: 5px;
+    left: 6px;
     width: 65px;
     height: 65px;
-    border-radius: 50%;
+    border-radius: 10%;
     border: 3px solid var(--bg-color);
-    background-color: var(--default-color);
+    background: linear-gradient(180deg, #49526340 0%, #7D8B9E40 100%);
+    backdrop-filter: blur(20px);
 }
 
 .profile-info {
