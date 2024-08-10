@@ -96,7 +96,7 @@ async function fetchContent() {
             await new Promise(resolve => setTimeout(resolve, 400));
         }
     }
-    throw new Error('Cannot fetch content after 3 retries.');
+    throw new Error('Cannot fetch content.');
 }
 
 function showMessage(messageType) {
@@ -222,13 +222,18 @@ function displayContent(handle) {
             const contentDiv = document.createElement('div');
             contentDiv.className = tweet.contentType;
             
+            const contentSubtitle = document.createElement('div');
+            contentSubtitle.className = 'subtitle';
+            contentSubtitle.textContent = 'MESSAGE';
+            
             const contentElement = document.createElement('p');
             contentElement.className = 'content-text';
             contentElement.textContent = tweet.message;
             
+            contentDiv.appendChild(contentSubtitle);
             contentDiv.appendChild(contentElement);
             
-            if (tweet.colorStyle !== 'default') {
+            if (tweet.colorStyle !== '') {
                 contentDiv.classList.add(tweet.colorStyle);
             }
             
