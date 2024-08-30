@@ -72,7 +72,8 @@ main {
     z-index: 1;
     position: relative;
     padding: 10px;
-    padding-top: 52px;
+    padding-top: 50.9px;
+    padding-left: 9.5px;
     background-color: var(--bg-color);
     display: flex;
     justify-content: flex-start;
@@ -92,7 +93,7 @@ main {
     font-size: 22.3px;
     font-weight: 700;
     margin: 0;
-    transform: translateY(-1.8px);
+    transform: translateY(-2px);
 }
 
 #handle-input {
@@ -286,15 +287,26 @@ main {
 .class {
     width: 45px;
     height: 28px;
+    padding-top: 10px;
     font-size: 14px;
     font-weight: 500;
     opacity: 0.3;
+    border: 1.1px solid #00000000;
     border-bottom: 3px solid #00000000;
 }
 
 .class.selected {
     opacity: 1;
-    border-bottom: 3px solid var(--button-color);
+    border-bottom: 3px solid var(--border-firm-color);
+    transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1), border 0.7s ease-out;
+}
+
+.class.animated {
+    opacity: 1;
+    background-color: var(--border-firm-color);
+    border: 1.1px solid var(--border-firm-color);
+    border-bottom: 3px solid var(--secondary-text-color);
+    transition: none;
 }
 
 .class-decept {
@@ -487,7 +499,7 @@ main {
         border: none;
     }
     #handle-input {
-        transform: translateY(-0.5px);
+        transform: translateY(-0px);
     }
 }
 

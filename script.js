@@ -32,7 +32,7 @@ async function fetchContent() {
     const proxyUrl = 'https://api.allorigins.win/get?url=';
 
     let retryCount = 0;
-    while (retryCount < 20) {
+    while (retryCount < 10) {
         
         try {
             const response = await fetch(proxyUrl + encodeURIComponent(url), {
@@ -360,6 +360,28 @@ function animateLogo() {
         launch.classList.add('logoanimated');
         main.classList.add('mainanimated');
     }, 0);
+}
+
+function classGoContent () {
+    const contentbtn = document.getElementById('class-content');
+    const configbtn = document.getElementById('class-config');
+
+    contentbtn.classList.add('animated');
+    setTimeout(() => {
+        contentbtn.classList.remove('animated');
+        configbtn.classList.remove('animated');
+    }, 1);
+}
+
+function classGoConfig () {
+    const contentbtn = document.getElementById('class-content');
+    const configbtn = document.getElementById('class-config');
+
+    configbtn.classList.add('animated');
+    setTimeout(() => {
+        contentbtn.classList.remove('animated');
+        configbtn.classList.remove('animated');
+    }, 1);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
