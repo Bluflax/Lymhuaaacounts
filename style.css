@@ -383,6 +383,7 @@ main {
 .event .title {
     font-size: 1.5em;
     font-weight: 500;
+    margin-bottom: 5px;
 }
 
 .event .subtitle {
